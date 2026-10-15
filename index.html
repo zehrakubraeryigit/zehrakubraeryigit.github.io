@@ -1,559 +1,982 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zehra Kübra Eryiğit - Physics Engineer</title>
+    <title>Zehra Kübra Eryiğit | Fizik Mühendisi — Ar-Ge & İnce Film & Donanım</title>
+    <meta name="description" content="Zehra Kübra Eryiğit - Hacettepe Üniversitesi Fizik Mühendisi. İnce film kaplama (RF Sputtering), malzeme karakterizasyonu, elektro-optik ve elektronik donanım tasarımı portfolyosu.">
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        space: ['Space Grotesk', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        lab: {
+                            950: '#050811',
+                            900: '#0a101f',
+                            800: '#111a2e',
+                            700: '#1e293b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        /* Parlak Açık Gökyüzü Mavisi Arka Plan */
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 50%, #38bdf8 100%);
+        /* Karesiz, Düz ve Temiz Arka Plan */
+        .bg-clean-ambient {
+            background: radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.06), transparent 45%),
+                        radial-gradient(circle at 85% 80%, rgba(14, 165, 233, 0.05), transparent 45%),
+                        #050811;
             background-attachment: fixed;
-            color: #0f172a; 
-            overflow-x: hidden;
-            scroll-behavior: smooth;
         }
-        h1, h2, h3, h4, .font-space { font-family: 'Space Grotesk', sans-serif; }
-        
-        /* Keskin, Mat ve Şeffaf Olmayan Çerçeveler */
-        .solid-panel {
-            background-color: #ffffff;
-            border: 1px solid #94a3b8; 
-            border-radius: 0px; 
-            box-shadow: 4px 4px 0px rgba(15, 23, 42, 0.05); 
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .solid-panel:hover {
-            box-shadow: 6px 6px 0px rgba(14, 165, 233, 0.15);
+        html:not(.dark) .bg-clean-ambient {
+            background: radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.1), transparent 45%),
+                        radial-gradient(circle at 85% 80%, rgba(14, 165, 233, 0.07), transparent 45%),
+                        #f8fafc;
+            background-attachment: fixed;
         }
 
-        .solid-header {
-            background-color: #ffffff;
-            border-bottom: 1px solid #cbd5e1;
+        /* İnce Köşe Vurgulu Kartlar */
+        .tech-card {
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
-        /* Nanoparticle Emission Animation (MATLAB) */
-        @keyframes lightBeam {
-            0% { transform: translateX(-100%) rotate(45deg); opacity: 0; }
-            50% { opacity: 0.6; }
-            100% { transform: translateX(200%) rotate(45deg); opacity: 0; }
-        }
-        .animate-beam {
-            animation: lightBeam 3s infinite linear;
-        }
-
-        /* --- BAŞLANGIÇ SAVAŞ UÇAĞI KALKIŞ ANİMASYONU --- */
-        .initial-jet {
-            position: fixed;
-            bottom: -200px;
-            left: 5%;
-            z-index: 1;
-            opacity: 0;
-            pointer-events: none;
-            animation: jetTakeoff 6s cubic-bezier(0.35, 0, 0.25, 1) forwards;
-            filter: drop-shadow(0 15px 15px rgba(0,0,0,0.3));
-        }
-        @keyframes jetTakeoff {
-            0% { transform: translate(0, 0) scale(1) rotate(35deg); opacity: 0; }
-            15% { opacity: 0.7; }
-            60% { opacity: 0.4; }
-            100% { transform: translate(85vw, -100vh) scale(0.3) rotate(45deg); opacity: 0; }
-        }
-
-        /* --- MOUSE HAREKETİ İLE FÜZE VE PATLAMA ANİMASYONU --- */
-        .missile-container {
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            animation: flyPath 1.6s ease-in forwards; 
-        }
-        .missile-body {
-            animation: hideMissile 1.6s forwards;
-        }
-        
-        .explosion-blast {
+        .tech-card::before,
+        .tech-card::after {
+            content: '';
             position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80px; height: 80px;
+            width: 10px;
+            height: 10px;
+            border-color: #38bdf8;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            opacity: 0.45;
+        }
+        .tech-card::before {
+            top: -1px;
+            left: -1px;
+            border-top: 2px solid #38bdf8;
+            border-left: 2px solid #38bdf8;
+        }
+        .tech-card::after {
+            bottom: -1px;
+            right: -1px;
+            border-bottom: 2px solid #38bdf8;
+            border-right: 2px solid #38bdf8;
+        }
+        .tech-card:hover::before,
+        .tech-card:hover::after {
+            width: 18px;
+            height: 18px;
+            opacity: 1;
+        }
+
+        /* Özel Range Slider Tasarımı */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            height: 5px;
+            border-radius: 999px;
+            background: rgba(56, 189, 248, 0.25);
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
             border-radius: 50%;
-            opacity: 0;
-            border: 2px solid rgba(234, 88, 12, 0.4);
-            background: radial-gradient(circle, rgba(234, 88, 12, 0.1) 0%, transparent 70%);
-            animation: showExplosion 1.6s forwards;
+            background: #38bdf8;
+            cursor: pointer;
+            margin-top: -5.5px;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
         }
-
-        .debris {
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 3px; height: 3px;
-            background-color: #475569;
-            border-radius: 0; 
-            opacity: 0;
-        }
-        .debris-1 { animation: scatter1 1.6s ease-out forwards; }
-        .debris-2 { animation: scatter2 1.6s ease-out forwards; }
-        .debris-3 { animation: scatter3 1.6s ease-out forwards; }
-        .debris-4 { animation: scatter4 1.6s ease-out forwards; }
-
-        @keyframes flyPath {
-            0% { transform: translate(0, 0) scale(0.6) rotate(var(--angle)); opacity: 0; }
-            10% { opacity: 1; }
-            85% { transform: translate(calc(var(--tx) * 0.85), calc(var(--ty) * 0.85)) scale(1) rotate(var(--angle)); opacity: 1; }
-            100% { transform: translate(var(--tx), var(--ty)) scale(1.2) rotate(var(--angle)); opacity: 1; }
-        }
-        
-        @keyframes hideMissile {
-            0%, 84% { opacity: 1; }
-            85%, 100% { opacity: 0; }
-        }
-
-        @keyframes showExplosion {
-            0%, 84% { opacity: 0; transform: translate(-50%, -50%) scale(0.1); }
-            85% { opacity: 1; transform: translate(-50%, -50%) scale(0.6); }
-            100% { opacity: 0; transform: translate(-50%, -50%) scale(2); border-color: rgba(234, 88, 12, 0); }
-        }
-
-        @keyframes scatter1 { 0%, 84% { opacity: 0; transform: translate(0,0); } 85% { opacity: 1; } 100% { opacity: 0; transform: translate(30px, -45px) scale(0.5); } }
-        @keyframes scatter2 { 0%, 84% { opacity: 0; transform: translate(0,0); } 85% { opacity: 1; } 100% { opacity: 0; transform: translate(-40px, -20px) scale(0.5); } }
-        @keyframes scatter3 { 0%, 84% { opacity: 0; transform: translate(0,0); } 85% { opacity: 1; } 100% { opacity: 0; transform: translate(25px, 35px) scale(0.5); } }
-        @keyframes scatter4 { 0%, 84% { opacity: 0; transform: translate(0,0); } 85% { opacity: 1; } 100% { opacity: 0; transform: translate(-25px, 40px) scale(0.5); } }
     </style>
 </head>
-<body class="antialiased selection:bg-sky-500 selection:text-white">
 
-    <!-- Header & Navigation -->
-    <header class="solid-header fixed top-0 w-full z-50 px-6 py-4 md:px-12 lg:px-24 flex flex-col md:flex-row justify-between items-center transition-all">
-        <div class="flex items-center gap-4">
-            <div>
-                <h1 class="text-xl font-bold tracking-tight text-slate-900">Zehra Kübra Eryiğit</h1>
-                <p class="text-[10px] text-sky-600 font-bold uppercase tracking-[0.3em] mt-0.5" data-tr="Fizik Mühendisi" data-en="Physics Engineer" data-zh="物理工程师">Fizik Mühendisi</p>
-            </div>
-        </div>
-        
-        <div class="flex items-center gap-6 mt-4 md:mt-0">
-            <nav class="hidden md:flex gap-6 text-sm font-semibold text-slate-600">
-                <a href="#hakkimda" class="hover:text-sky-600 transition" data-tr="Hakkımda" data-en="About" data-zh="关于">Hakkımda</a>
-                <a href="#katkilar" class="hover:text-sky-600 transition" data-tr="Size Ne Katabilirim?" data-en="What I Can Add" data-zh="我能提供什么">Size Ne Katabilirim?</a>
-                <a href="#projeler" class="hover:text-sky-600 transition" data-tr="Projeler" data-en="Projects" data-zh="项目">Projeler</a>
-                <a href="#atolye" class="hover:text-sky-600 transition" data-tr="İlgi Alanları" data-en="Interests" data-zh="兴趣">İlgi Alanları</a>
+<body class="bg-clean-ambient text-slate-900 dark:text-slate-100 antialiased selection:bg-sky-500 selection:text-white transition-colors duration-300 overflow-x-hidden">
+
+    <!-- Arka Plan Fotonik Nokta Örgüsü (Karesiz, Sadece Noktalar) -->
+    <canvas id="waveCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-65 dark:opacity-80"></canvas>
+
+    <!-- Üst Navigasyon Barı -->
+    <header class="fixed top-0 w-full z-50 backdrop-blur-md bg-white/85 dark:bg-lab-950/85 border-b border-slate-200 dark:border-slate-800/80 transition-colors">
+        <div class="max-w-7xl mx-auto px-6 py-3.5 flex flex-wrap justify-between items-center gap-4">
+            <!-- İsim ve Teknik Etiket -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 bg-sky-500/10 border border-sky-500/40 flex items-center justify-center font-mono font-bold text-sky-600 dark:text-sky-400 text-sm group-hover:bg-sky-500 group-hover:text-slate-950 transition-all">
+                    ZKE
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h1 class="text-base md:text-lg font-bold tracking-tight font-space text-slate-900 dark:text-white">Zehra Kübra Eryiğit</h1>
+                        <span class="hidden sm:inline-block text-[10px] font-mono px-1.5 py-0.5 bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/20">B.Sc.</span>
+                    </div>
+                    <p class="text-[10px] font-mono text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em]" 
+                       data-tr="Fizik Mühendisi · Ar-Ge & İnce Film" 
+                       data-en="Physics Engineer · R&D & Thin Film" 
+                       data-zh="物理工程师 · 研发与薄膜工艺">Fizik Mühendisi · Ar-Ge & İnce Film</p>
+                </div>
+            </a>
+
+            <!-- Menü Linkleri -->
+            <nav class="hidden lg:flex items-center gap-7 text-xs font-mono uppercase tracking-wider text-slate-600 dark:text-slate-300">
+                <a href="#hakkimda" class="hover:text-sky-500 dark:hover:text-sky-400 transition" data-tr="01. Hakkımda" data-en="01. About" data-zh="01. 关于我">01. Hakkımda</a>
+                <a href="#yetkinlikler" class="hover:text-sky-500 dark:hover:text-sky-400 transition" data-tr="02. Yetkinlikler" data-en="02. Capabilities" data-zh="02. 专业能力">02. Yetkinlikler</a>
+                <a href="#projeler" class="hover:text-sky-500 dark:hover:text-sky-400 transition" data-tr="03. Projeler" data-en="03. Projects" data-zh="03. 项目经验">03. Projeler</a>
+                <a href="#atolye" class="hover:text-sky-500 dark:hover:text-sky-400 transition" data-tr="04. İlgi Alanları" data-en="04. Interests" data-zh="04. 兴趣与实践">04. İlgi Alanları</a>
             </nav>
-            
-            <!-- Language Switcher -->
-            <div class="flex bg-slate-100 p-1 rounded-sm border border-slate-300 text-xs font-space">
-                <button onclick="setLang('tr')" id="btn-tr" class="px-3 py-1 rounded-sm bg-sky-600 text-white font-bold transition">TR</button>
-                <button onclick="setLang('en')" id="btn-en" class="px-3 py-1 rounded-sm text-slate-600 hover:text-slate-900 transition">EN</button>
-                <button onclick="setLang('zh')" id="btn-zh" class="px-3 py-1 rounded-sm text-slate-600 hover:text-slate-900 transition">ZH</button>
-            </div>
 
-            <a href="#iletisim" class="hidden md:block bg-slate-900 text-white px-6 py-2 rounded-none text-sm font-bold hover:bg-sky-600 transition" data-tr="İletişim" data-en="Contact" data-zh="联系">İletişim</a>
+            <!-- Dil Değiştirici, Tema Butonu ve İletişim -->
+            <div class="flex items-center gap-3">
+                <!-- Dil Seçimi -->
+                <div class="flex bg-slate-100 dark:bg-lab-900 p-0.5 border border-slate-300 dark:border-slate-700 text-[11px] font-mono">
+                    <button onclick="setLang('tr')" id="btn-tr" class="px-2.5 py-1 bg-sky-500 text-slate-950 font-bold transition">TR</button>
+                    <button onclick="setLang('en')" id="btn-en" class="px-2.5 py-1 text-slate-600 dark:text-slate-400 hover:text-sky-400 transition">EN</button>
+                    <button onclick="setLang('zh')" id="btn-zh" class="px-2.5 py-1 text-slate-600 dark:text-slate-400 hover:text-sky-400 transition">ZH</button>
+                </div>
+
+                <!-- Koyu / Açık Tema Anahtarı -->
+                <button onclick="toggleTheme()" class="p-2 border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-lab-900 text-slate-700 dark:text-sky-400 hover:border-sky-500 transition" title="Temayı Değiştir / Toggle Theme">
+                    <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 block dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+
+                <a href="#iletisim" class="hidden sm:inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-400 text-slate-950 px-4 py-1.5 text-xs font-mono font-bold uppercase tracking-wider transition shadow-[0_0_15px_rgba(56,189,248,0.25)]"
+                   data-tr="İletişim" data-en="Contact" data-zh="联系我">İletişim</a>
+            </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <div class="p-6 md:p-12 lg:px-24 lg:pt-40 pt-32 max-w-7xl mx-auto relative z-10">
-        
-        <!-- Hero Section -->
-        <main class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-                <span class="inline-flex items-center gap-2 bg-white border border-sky-200 text-sky-700 text-[10px] font-bold px-4 py-2 rounded-none mb-6 uppercase tracking-widest shadow-sm">
-                    <span class="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse"></span>
-                    <span data-tr="YENİ MEZUN / GÖREVE HAZIR" data-en="NEW GRADUATE / READY TO WORK" data-zh="应届毕业生 / 准备就绪">YENİ MEZUN / GÖREVE HAZIR</span>
-                </span>
-                
-                <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6 text-slate-900 font-space">
-                    <span data-tr="İleri Teknoloji ve" data-en="Advanced Tech &" data-zh="先进技术与">İleri Teknoloji ve</span> <br>
-                    <span class="text-sky-600" data-tr="Ar-Ge Mühendisliği" data-en="R&D Engineering" data-zh="研发工程">Ar-Ge Mühendisliği</span>
+    <!-- Ana İçerik Kapsayıcısı -->
+    <div class="max-w-7xl mx-auto px-6 pt-28 md:pt-36 pb-20 relative z-10">
+
+        <!-- HERO BÖLÜMÜ -->
+        <main class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            
+            <!-- Sol Sütun: Tanıtım -->
+            <div class="lg:col-span-7 space-y-6">
+                <div class="inline-flex items-center gap-2.5 bg-white/90 dark:bg-lab-900/90 border border-sky-500/30 px-3.5 py-1.5 text-[11px] font-mono text-sky-700 dark:text-sky-400">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 -ml-4"></span>
+                    <span data-tr="YENİ MEZUN · AR-GE VE ÜRETİM POZİSYONLARINA HAZIR" 
+                          data-en="NEW GRADUATE · READY FOR R&D AND ENGINEERING ROLES" 
+                          data-zh="应届毕业生 · 随时可投入研发与工程岗位">YENİ MEZUN · AR-GE VE ÜRETİM POZİSYONLARINA HAZIR</span>
+                </div>
+
+                <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold font-space tracking-tight leading-[1.1] text-slate-900 dark:text-white">
+                    <span data-tr="Teorik Fizikten" data-en="From Physical Principles to" data-zh="从基础物理原理到">Teorik Fizikten</span><br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 via-cyan-400 to-teal-400" 
+                          data-tr="Uygulamalı Mühendisliğe." 
+                          data-en="Applied Engineering." 
+                          data-zh="应用工程实践。">Uygulamalı Mühendisliğe.</span>
                 </h2>
-                
-                <p class="text-slate-600 text-lg md:text-xl mb-10 leading-relaxed font-light" data-tr="Hacettepe Üniversitesi Fizik Mühendisliği mezunuyum. Benim için mühendislik, var olan cihazları kullanmanın ötesinde, arka plandaki temel doğa yasalarını anlayıp yeni teknolojiler üretmektir." data-en="I am a Physics Engineering graduate from Hacettepe University. For me, engineering goes beyond using existing devices; it means understanding the fundamental laws of nature in the background and producing new technologies." data-zh="我毕业于哈塞泰佩大学物理工程专业。对我来说，工程不仅仅是使用现有的设备，而是了解其背后的基本自然法则并创造新技术。">
-                    Hacettepe Üniversitesi Fizik Mühendisliği mezunuyum. Benim için mühendislik, var olan cihazları kullanmanın ötesinde, arka plandaki temel doğa yasalarını anlayıp yeni teknolojiler üretmektir.
+
+                <p class="text-base md:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl"
+                   data-tr="Hacettepe Üniversitesi Fizik Mühendisliği mezunuyum. Lisans eğitimim boyunca RF Magnetron Sputtering ile ince film büyütme, ultrasonik dönüştürücüler için PCB tasarımı ve MATLAB'da ışık-madde etkileşimi modelleme gibi çalışmalarda yer alarak teorik fiziği laboratuvar pratiğiyle birleştirme imkânı buldum."
+                   data-en="I am a Physics Engineering graduate from Hacettepe University. Throughout my undergraduate studies, I focused on connecting theoretical physics with laboratory practice through projects in RF Magnetron Sputtering thin-film growth, ultrasonic driver PCB design, and MATLAB-based light-matter interaction modeling."
+                   data-zh="我毕业于哈塞泰佩大学物理工程系。在本科学习期间，我通过射频磁控溅射薄膜生长、超声波驱动PCB设计以及MATLAB光与物质相互作用建模等项目，致力于将理论物理与实验室实践相结合。">
+                    Hacettepe Üniversitesi Fizik Mühendisliği mezunuyum. Lisans eğitimim boyunca RF Magnetron Sputtering ile ince film büyütme, ultrasonik dönüştürücüler için PCB tasarımı ve MATLAB'da ışık-madde etkileşimi modelleme gibi çalışmalarda yer alarak teorik fiziği laboratuvar pratiğiyle birleştirme imkânı buldum.
                 </p>
-                
-                <div class="flex flex-wrap gap-4 font-space">
-                    <a href="#projeler" class="bg-sky-600 text-white px-8 py-3.5 rounded-none text-sm font-bold hover:bg-slate-900 transition-colors duration-300" data-tr="Çalışmalarımı İncele" data-en="Review My Work" data-zh="查看我的工作">Çalışmalarımı İncele</a>
-                    <a href="#iletisim" class="bg-white border border-slate-300 text-slate-800 px-8 py-3.5 rounded-none text-sm font-bold hover:bg-slate-50 transition-colors duration-300 shadow-sm" data-tr="İletişime Geç" data-en="Get in Touch" data-zh="联系我">İletişime Geç</a>
+
+                <!-- Hızlı Aksiyon Butonları -->
+                <div class="flex flex-wrap gap-4 pt-2 font-mono text-xs">
+                    <a href="#projeler" class="bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold px-6 py-3.5 uppercase tracking-wider transition flex items-center gap-2 shadow-[0_0_20px_rgba(56,189,248,0.3)]">
+                        <span data-tr="Çalışmalarımı İncele" data-en="Explore My Projects" data-zh="查看我的项目">Çalışmalarımı İncele</span>
+                        <span>→</span>
+                    </a>
+                    <a href="#iletisim" class="bg-white dark:bg-lab-900 border border-slate-300 dark:border-slate-700 hover:border-sky-500 text-slate-800 dark:text-slate-200 font-bold px-6 py-3.5 uppercase tracking-wider transition"
+                       data-tr="İletişime Geç" data-en="Get in Touch" data-zh="联系我">İletişime Geç</a>
+                </div>
+
+                <!-- Anahtar Teknik Etiketler -->
+                <div class="pt-4 flex flex-wrap gap-2 text-[11px] font-mono text-slate-500 dark:text-slate-400">
+                    <span class="px-2.5 py-1 bg-white/80 dark:bg-lab-900 border border-slate-200 dark:border-slate-800">RF Magnetron Sputtering</span>
+                    <span class="px-2.5 py-1 bg-white/80 dark:bg-lab-900 border border-slate-200 dark:border-slate-800">SEM · XRD · FTIR · Raman</span>
+                    <span class="px-2.5 py-1 bg-white/80 dark:bg-lab-900 border border-slate-200 dark:border-slate-800">MATLAB & Python</span>
+                    <span class="px-2.5 py-1 bg-white/80 dark:bg-lab-900 border border-slate-200 dark:border-slate-800">PCB & 3B Prototipleme</span>
                 </div>
             </div>
 
-            <!-- Tech Specs Panel -->
-            <div class="solid-panel p-8">
-                <dl class="divide-y divide-slate-200 text-sm">
-                    <div class="py-4 grid grid-cols-3 gap-4 items-center">
-                        <dt class="text-slate-500 uppercase tracking-widest text-xs font-bold font-space" data-tr="Eğitim" data-en="Education" data-zh="教育">Eğitim</dt>
-                        <dd class="col-span-2 font-bold text-slate-900" data-tr="Hacettepe Üniv. Fizik Müh." data-en="Hacettepe Univ. Physics Eng." data-zh="哈塞泰佩大学 物理工程">Hacettepe Üniv. Fizik Müh.</dd>
+            <!-- Sağ Sütun: İnteraktif Optik/Sinyal Laboratuvar Paneli + Teknik Künye -->
+            <div class="lg:col-span-5">
+                <div class="tech-card bg-white/95 dark:bg-lab-900/95 border border-slate-200 dark:border-slate-800 p-6 shadow-xl">
+                    <!-- Üst Durum Çubuğu -->
+                    <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3 mb-4 font-mono text-[11px]">
+                        <span class="text-sky-600 dark:text-sky-400 font-bold flex items-center gap-2">
+                            <span class="w-2 h-2 bg-sky-500 rounded-full animate-pulse"></span>
+                            <span data-tr="İNTERAKTİF DALGA & İNCE FİLM SİMÜLATÖRÜ" data-en="INTERACTIVE WAVE & THIN-FILM SIMULATOR" data-zh="交互式波与薄膜模拟器">İNTERAKTİF DALGA & İNCE FİLM SİMÜLATÖRÜ</span>
+                        </span>
+                        <span class="text-slate-400">SiO₂ / n ≈ 1.46</span>
                     </div>
-                    <div class="py-4 grid grid-cols-3 gap-4 items-center">
-                        <dt class="text-slate-500 uppercase tracking-widest text-xs font-bold font-space" data-tr="Odak" data-en="Focus" data-zh="专注领域">Odak</dt>
-                        <dd class="col-span-2 text-slate-700 leading-relaxed font-medium">RF Sputtering · Thin Film · Electro-Optics · Hardware Design</dd>
+
+                    <!-- Canlı Osiloskop / Girişim Ekranı -->
+                    <div class="relative bg-lab-950 border border-slate-800 h-36 mb-4 overflow-hidden">
+                        <canvas id="scopeCanvas" class="w-full h-full"></canvas>
+                        <div class="absolute top-2 left-2.5 font-mono text-[10px] text-sky-400/90 space-y-0.5 pointer-events-none">
+                            <div>OPD (2nd·cosθ): <span id="opdValue" class="text-white font-bold">438 nm</span></div>
+                            <div>STATE: <span id="phaseState" class="text-emerald-400 font-bold">CONSTRUCTIVE</span></div>
+                        </div>
+                        <div class="absolute bottom-1.5 right-2.5 font-mono text-[9px] text-slate-500 pointer-events-none">
+                            <span data-tr="Kaydırıcılarla dalga boyu ve kalınlığı değiştirin" data-en="Adjust wavelength & film thickness via sliders" data-zh="通过滑块调整波长和薄膜厚度">Kaydırıcılarla dalga boyu ve kalınlığı değiştirin</span>
+                        </div>
                     </div>
-                    <div class="py-4 grid grid-cols-3 gap-4 items-center">
-                        <dt class="text-slate-500 uppercase tracking-widest text-xs font-bold font-space" data-tr="Yazılım" data-en="Software" data-zh="软件">Yazılım</dt>
-                        <dd class="col-span-2 text-slate-700 font-medium">MATLAB · Python · FreeCAD · SolidWorks · EasyEDA</dd>
+
+                    <!-- Simülasyon Kontrolleri -->
+                    <div class="grid grid-cols-2 gap-4 mb-6 p-3 bg-slate-100/80 dark:bg-lab-950/60 border border-slate-200 dark:border-slate-800/80 font-mono text-xs">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <label class="text-slate-500 dark:text-slate-400 text-[10px]" data-tr="DALGA BOYU (λ)" data-en="WAVELENGTH (λ)" data-zh="波长 (λ)">DALGA BOYU (λ)</label>
+                                <span id="wlLabel" class="text-sky-600 dark:text-sky-400 font-bold text-[11px]">550 nm</span>
+                            </div>
+                            <input id="wlSlider" type="range" min="380" max="750" value="550" class="w-full">
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <label class="text-slate-500 dark:text-slate-400 text-[10px]" data-tr="FİLM KALINLIĞI (d)" data-en="THICKNESS (d)" data-zh="薄膜厚度 (d)">FİLM KALINLIĞI (d)</label>
+                                <span id="thLabel" class="text-sky-600 dark:text-sky-400 font-bold text-[11px]">150 nm</span>
+                            </div>
+                            <input id="thSlider" type="range" min="50" max="400" value="150" class="w-full">
+                        </div>
                     </div>
-                    <div class="py-4 grid grid-cols-3 gap-4 items-center">
-                        <dt class="text-slate-500 uppercase tracking-widest text-xs font-bold font-space" data-tr="Analiz" data-en="Analysis" data-zh="分析">Analiz</dt>
-                        <dd class="col-span-2 text-sky-700 font-bold leading-relaxed">SEM · FTIR · UV-Vis · Raman · XRD · Profilometri · Temas Açısı Ölçümü</dd>
-                    </div>
-                </dl>
+
+                    <!-- Teknik Künye Özeti -->
+                    <dl class="divide-y divide-slate-200 dark:divide-slate-800/80 text-xs">
+                        <div class="py-2.5 grid grid-cols-3 gap-2 items-center">
+                            <dt class="font-mono uppercase text-slate-400 text-[10px]" data-tr="EĞİTİM" data-en="EDUCATION" data-zh="教育背景">EĞİTİM</dt>
+                            <dd class="col-span-2 font-semibold text-slate-900 dark:text-slate-100" data-tr="Hacettepe Üniversitesi — Fizik Mühendisliği" data-en="Hacettepe University — Physics Engineering" data-zh="哈塞泰佩大学 — 物理工程">Hacettepe Üniversitesi — Fizik Mühendisliği</dd>
+                        </div>
+                        <div class="py-2.5 grid grid-cols-3 gap-2 items-center">
+                            <dt class="font-mono uppercase text-slate-400 text-[10px]" data-tr="ODAK ALANI" data-en="CORE FOCUS" data-zh="核心方向">ODAK ALANI</dt>
+                            <dd class="col-span-2 text-slate-700 dark:text-slate-300">RF Sputtering · Thin Films · Electro-Optics · PCB Design</dd>
+                        </div>
+                        <div class="py-2.5 grid grid-cols-3 gap-2 items-center">
+                            <dt class="font-mono uppercase text-slate-400 text-[10px]" data-tr="KARAKTERİZASYON" data-en="METROLOGY" data-zh="表征与测试">KARAKTERİZASYON</dt>
+                            <dd class="col-span-2 text-sky-600 dark:text-sky-400 font-mono font-medium">SEM · XRD · FTIR · Raman · UV-Vis · Profilometri · Temas Açısı</dd>
+                        </div>
+                        <div class="pt-2.5 grid grid-cols-3 gap-2 items-center">
+                            <dt class="font-mono uppercase text-slate-400 text-[10px]" data-tr="YAZILIM & CAD" data-en="SOFTWARE & CAD" data-zh="软件与设计">YAZILIM & CAD</dt>
+                            <dd class="col-span-2 text-slate-700 dark:text-slate-300 font-mono">MATLAB · Python · SolidWorks · FreeCAD · EasyEDA</dd>
+                        </div>
+                    </dl>
+                </div>
             </div>
         </main>
 
-        <!-- Stats Grid -->
-        <div class="mt-20 grid grid-cols-2 md:grid-cols-4 solid-panel p-8 gap-8 text-center divide-x divide-slate-200">
-            <div>
-                <p class="text-4xl font-space font-extrabold text-slate-900">2.89</p>
-                <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-2" data-tr="Hacettepe AGNO" data-en="Hacettepe GPA" data-zh="哈塞泰佩大学 GPA">Hacettepe AGNO</p>
+        <!-- SAYISAL GÖSTERGELER (METRİKLER) -->
+        <section class="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="tech-card bg-white/90 dark:bg-lab-900/90 border border-slate-200 dark:border-slate-800 p-6">
+                <div class="text-[10px] font-mono text-slate-400 uppercase tracking-widest mb-1">01 // AKADEMİK</div>
+                <p class="text-3xl md:text-4xl font-space font-bold text-slate-900 dark:text-white">2.89 <span class="text-sm font-mono text-sky-500">/ 4.00</span></p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium" data-tr="Hacettepe Fizik Müh. AGNO" data-en="Hacettepe Physics Eng. GPA" data-zh="哈塞泰佩大学物理工程 GPA">Hacettepe Fizik Müh. AGNO</p>
             </div>
-            <div>
-                <p class="text-4xl font-space font-extrabold text-slate-900">2</p>
-                <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-2" data-tr="Akademik Bildiri" data-en="Academic Papers" data-zh="学术论文">Akademik Bildiri</p>
+            <div class="tech-card bg-white/90 dark:bg-lab-900/90 border border-slate-200 dark:border-slate-800 p-6">
+                <div class="text-[10px] font-mono text-slate-400 uppercase tracking-widest mb-1">02 // YAYINLAR</div>
+                <p class="text-3xl md:text-4xl font-space font-bold text-slate-900 dark:text-white">2 <span class="text-sm font-mono text-sky-500">Bildiri</span></p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium" data-tr="Uluslararası Kongre Sunumu (NanoTR-19 & TFD-41)" data-en="International Conference Papers (NanoTR-19 & TFD-41)" data-zh="国际学术会议论文 (NanoTR-19 & TFD-41)">Uluslararası Kongre Sunumu (NanoTR-19 & TFD-41)</p>
             </div>
-            <div>
-                <p class="text-4xl font-space font-extrabold text-slate-900">5<span class="text-sky-600">+</span></p>
-                <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-2" data-tr="Sertifika" data-en="Certificates" data-zh="证书">Sertifika</p>
+            <div class="tech-card bg-white/90 dark:bg-lab-900/90 border border-slate-200 dark:border-slate-800 p-6">
+                <div class="text-[10px] font-mono text-slate-400 uppercase tracking-widest mb-1">03 // LABORATUVAR</div>
+                <p class="text-3xl md:text-4xl font-space font-bold text-slate-900 dark:text-white">7<span class="text-sky-500">+</span> <span class="text-sm font-mono text-sky-500">Yöntem</span></p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium" data-tr="İnce Film & Karakterizasyon Cihaz Pratiği" data-en="Thin-Film & Characterization Methods" data-zh="薄膜沉积与材料表征技术">İnce Film & Karakterizasyon Cihaz Pratiği</p>
             </div>
-            <div>
-                <p class="text-4xl font-space font-extrabold text-slate-900">2</p>
-                <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-2" data-tr="Mühendislik Stajı" data-en="Engineering Internships" data-zh="工程实习">Mühendislik Stajı</p> 
-            </div>
-        </div>
-
-        <!-- About Me Section -->
-        <section id="hakkimda" class="mt-24 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-            <div class="solid-panel p-8 md:p-12">
-                <h3 class="text-2xl font-space font-bold text-slate-900 uppercase tracking-wider mb-6" data-tr="Neden Bir Fizik Mühendisi?" data-en="Why a Physics Engineer?" data-zh="为什么选择物理工程师？">Neden Bir Fizik Mühendisi?</h3>
-                <p class="text-slate-600 text-lg leading-relaxed mb-4 font-light" data-tr="Bir cihazın yalnızca nasıl çalıştığını değil, çalışma prensiplerinin temelinde yatan malzeme özelliklerini ve dalga fiziğini de anlamaya önem veriyorum. Eğitimim boyunca teorik bilgiyi ezberlemek yerine, analitik düşünerek sorunlara çözüm üretmeye odaklandım. Optik, kuantum ve katı hâl fiziği alanlarında edindiğim teorik bilgileri laboratuvar çalışmalarında uygulama fırsatı buldum." data-en="I attach importance to understanding not only how a device works, but also the material properties and wave physics underlying its working principles. Throughout my education, instead of memorizing theoretical knowledge, I focused on producing solutions to problems by thinking analytically. I had the opportunity to apply the theoretical knowledge I gained in the fields of optics, quantum, and solid-state physics in laboratory studies." data-zh="我不仅重视了解设备的工作原理，还重视了解其工作原理背后的材料特性和波物理学。在我的整个教育过程中，我没有死记硬背理论知识，而是专注于通过分析思考来解决问题。我有机会将在光学、量子和固态物理领域获得的理论知识应用于实验室研究。">
-                    Bir cihazın yalnızca nasıl çalıştığını değil, çalışma prensiplerinin temelinde yatan malzeme özelliklerini ve dalga fiziğini de anlamaya önem veriyorum. Eğitimim boyunca teorik bilgiyi ezberlemek yerine, analitik düşünerek sorunlara çözüm üretmeye odaklandım. Optik, kuantum ve katı hâl fiziği alanlarında edindiğim teorik bilgileri laboratuvar çalışmalarında uygulama fırsatı buldum.
-                </p>
-                <p class="text-slate-600 text-lg leading-relaxed font-light" data-tr="PVD ince film kaplama, vakum sistemleri ve SEM, FTIR, XRD gibi malzeme karakterizasyon cihazlarıyla uygulamalı deneyim kazandım. Kariyerimin başında olsam da öğrenmeye, kendimi geliştirmeye ve yeni teknikler edinmeye istekliyim. Fizik mühendisliği altyapım ve analitik bakış açımla şirketinizin Ar-Ge çalışmalarına katkı sunabileceğime inanıyorum." data-en="I gained hands-on experience with PVD thin film coating, vacuum systems, and material characterization devices such as SEM, FTIR, and XRD. Although I am at the beginning of my career, I am eager to learn, improve myself, and acquire new techniques. I believe that I can contribute to your company's R&D efforts with my physics engineering background and analytical perspective." data-zh="我在PVD薄膜涂层、真空系统以及SEM、FTIR和XRD等材料表征设备方面获得了实践经验。虽然我处于职业生涯的起步阶段，但我渴望学习、提高自己并掌握新技术。我相信，凭借我的物理工程背景和分析视角，我能为贵公司的研发工作做出贡献。">
-                    PVD ince film kaplama, vakum sistemleri ve SEM, FTIR, XRD gibi malzeme karakterizasyon cihazlarıyla uygulamalı deneyim kazandım. Kariyerimin başında olsam da öğrenmeye, kendimi geliştirmeye ve yeni teknikler edinmeye istekliyim. Fizik mühendisliği altyapım ve analitik bakış açımla şirketinizin Ar-Ge çalışmalarına katkı sunabileceğime inanıyorum.
-                </p>
-            </div>
-
-            <div class="solid-panel p-8 md:p-12 bg-slate-50">
-                <h3 class="text-2xl font-space font-bold text-slate-900 uppercase tracking-wider mb-8" data-tr="Akademik Geçmiş" data-en="Academic Background" data-zh="学术背景">Akademik Geçmiş</h3>
-                
-                <div class="space-y-8">
-                    <div>
-                        <h4 class="text-[11px] text-sky-600 font-bold uppercase tracking-[0.2em] mb-4 border-b border-slate-200 pb-2" data-tr="BİLDİRİLER & YAYINLAR" data-en="PUBLICATIONS & PAPERS" data-zh="出版物与论文">BİLDİRİLER & YAYINLAR</h4>
-                        <ul class="space-y-4">
-                            <li class="flex items-start gap-3">
-                                <div class="w-2 h-2 rounded-none bg-sky-500 mt-1.5"></div>
-                                <p class="text-sm font-medium text-slate-700 leading-relaxed"><strong class="font-bold text-slate-900">NanoTR-19 Konferansı:</strong> "Synthesis of SiO2 Thin Films By RF Magnetron Sputtering..." <span class="text-slate-500 font-light" data-tr="(Poster Sunumu)" data-en="(Poster Presentation)" data-zh="(海报展示)">(Poster Sunumu)</span></p>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <div class="w-2 h-2 rounded-none bg-sky-500 mt-1.5"></div>
-                                <p class="text-sm font-medium text-slate-700 leading-relaxed"><strong class="font-bold text-slate-900">TFD 41. Uluslararası Fizik Kongresi:</strong> "Design of an Ultrasonic Source and Sonochemical Synthesis..." <span class="text-slate-500 font-light" data-tr="(Sözlü Sunum)" data-en="(Oral Presentation)" data-zh="(口头报告)">(Sözlü Sunum)</span></p>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-[11px] text-sky-600 font-bold uppercase tracking-[0.2em] mb-4 border-b border-slate-200 pb-2" data-tr="EĞİTİM & SERTİFİKALAR" data-en="TRAINING & CERTIFICATES" data-zh="培训与证书">EĞİTİM & SERTİFİKALAR</h4>
-                        <ul class="space-y-3 text-sm font-medium text-slate-700">
-                            <li class="flex items-center gap-3"><div class="w-1.5 h-1.5 bg-slate-400 rounded-none"></div> <span data-tr="İş Sağlığı ve Güvenliği (OHS) Sertifikası - 2025" data-en="Occupational Health and Safety (OHS) Certificate - 2025" data-zh="职业健康与安全 (OHS) 证书 - 2025">İş Sağlığı ve Güvenliği (OHS) Sertifikası - 2025</span></li>
-                            <li class="flex items-center gap-3"><div class="w-1.5 h-1.5 bg-slate-400 rounded-none"></div> <span data-tr="4 Adet Mesleki Eğitim Tam Katılım Sertifikası" data-en="4 Professional Training Certificates of Full Attendance" data-zh="4份专业培训全勤证书">4 Adet Mesleki Eğitim Tam Katılım Sertifikası</span></li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="tech-card bg-white/90 dark:bg-lab-900/90 border border-slate-200 dark:border-slate-800 p-6">
+                <div class="text-[10px] font-mono text-slate-400 uppercase tracking-widest mb-1">04 // DENEYİM & EĞİTİM</div>
+                <p class="text-3xl md:text-4xl font-space font-bold text-slate-900 dark:text-white">2 <span class="text-sm font-mono text-sky-500">Staj + 5 Sertifika</span></p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium" data-tr="Mühendislik Stajı & İSG / Mesleki Eğitimler" data-en="Engineering Internships & OHS / Tech Certificates" data-zh="工程实习与职业健康安全/专业证书">Mühendislik Stajı & İSG / Mesleki Eğitimler</p>
             </div>
         </section>
 
-        <!-- Katkı Verebileceğim Alanlar (Size Ne Katabilirim?) -->
-        <section id="katkilar" class="mt-32">
-            <h3 class="text-3xl font-space font-bold text-slate-900 uppercase tracking-widest mb-10 text-center" data-tr="Size Ne Katabilirim?" data-en="What I Can Add" data-zh="我能为您带来什么？">Size Ne Katabilirim?</h3>
-            
-            <div class="solid-panel p-8 md:p-12">
-                <dl class="divide-y divide-slate-200">
-                    <!-- Madde 1 -->
-                    <div class="py-6 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 items-start">
-                        <dt class="text-slate-900 font-bold font-space text-lg flex items-center gap-3" data-tr="Yarıiletken Üretim Süreçleri" data-en="Semiconductor Manufacturing Processes" data-zh="半导体制造工艺">
-                            <div class="hidden md:block w-2 h-2 rounded-none bg-sky-500"></div>
-                            Yarıiletken Üretim Süreçleri
-                        </dt>
-                        <dd class="md:col-span-2 text-slate-600 leading-relaxed font-light text-[15px]" data-tr="Yarıiletken fiziği ve üretim süreçleri (litografi, ince film kaplama, aşındırma) konularında sağlam bir teorik altyapıya sahibim. Çip üretim proseslerinin işleyiş mantığını kavrayarak, ince film kaplama gibi temel adımları laboratuvar ortamında pratik etme fırsatı buldum." data-en="I have a solid theoretical background in semiconductor physics and manufacturing processes (lithography, thin film deposition, etching). By grasping the logic of chip production processes, I had the opportunity to practice fundamental steps like thin film deposition in a laboratory environment." data-zh="我在半导体物理和制造工艺（光刻、薄膜沉积、蚀刻）方面拥有扎实的理论基础。通过掌握芯片生产过程的逻辑，我有机会在实验室环境中实践薄膜沉积等基本步骤。">
-                            Yarıiletken fiziği ve üretim süreçleri (litografi, ince film kaplama, aşındırma) konularında sağlam bir teorik altyapıya sahibim. Çip üretim proseslerinin işleyiş mantığını kavrayarak, ince film kaplama gibi temel adımları laboratuvar ortamında pratik etme fırsatı buldum.
-                        </dd>
-                    </div>
-
-                    <!-- Madde 2 -->
-                    <div class="py-6 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 items-start">
-                        <dt class="text-slate-900 font-bold font-space text-lg flex items-center gap-3" data-tr="İnce film ve kaplama prosesleri" data-en="Thin Film & Coating Processes" data-zh="薄膜与涂层工艺">
-                            <div class="hidden md:block w-2 h-2 rounded-none bg-sky-500"></div>
-                            İnce film ve kaplama prosesleri
-                        </dt>
-                        <dd class="md:col-span-2 text-slate-600 leading-relaxed font-light text-[15px]" data-tr="Optik, yarı iletken, güneş enerjisi, sensör, havacılık ve savunma alanlarında vakum ve kaplama prosesi." data-en="Vacuum and coating processes in optics, semiconductors, solar energy, sensors, aviation, and defense." data-zh="光学、半导体、太阳能、传感器、航空和国防领域的真空和涂层工艺。">
-                            Optik, yarı iletken, güneş enerjisi, sensör, havacılık ve savunma alanlarında vakum ve kaplama prosesi.
-                        </dd>
-                    </div>
-                    
-                    <!-- Madde 3 -->
-                    <div class="py-6 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 items-start">
-                        <dt class="text-slate-900 font-bold font-space text-lg flex items-center gap-3" data-tr="Malzeme karakterizasyonu" data-en="Material Characterization" data-zh="材料表征">
-                            <div class="hidden md:block w-2 h-2 rounded-none bg-sky-500"></div>
-                            Malzeme karakterizasyonu
-                        </dt>
-                        <dd class="md:col-span-2 text-slate-600 leading-relaxed font-light text-[15px]" data-tr="Analiz ve test laboratuvarlarında SEM, FTIR, Raman, XRD, UV-Vis ve profilometri ile ölçüm yapmak, sonuçları yorumlamak." data-en="Performing measurements and interpreting results using SEM, FTIR, Raman, XRD, UV-Vis, and profilometry in analysis and testing laboratories." data-zh="在分析和测试实验室中使用 SEM、FTIR、Raman、XRD、UV-Vis 和轮廓仪进行测量并解释结果。">
-                            Analiz ve test laboratuvarlarında SEM, FTIR, Raman, XRD, UV-Vis ve profilometri ile ölçüm yapmak, sonuçları yorumlamak.
-                        </dd>
-                    </div>
-
-                    <!-- Madde 4 -->
-                    <div class="py-6 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 items-start">
-                        <dt class="text-slate-900 font-bold font-space text-lg flex items-center gap-3" data-tr="Ar-Ge ve proses geliştirme" data-en="R&D and Process Development" data-zh="研发与工艺开发">
-                            <div class="hidden md:block w-2 h-2 rounded-none bg-sky-500"></div>
-                            Ar-Ge ve proses geliştirme
-                        </dt>
-                        <dd class="md:col-span-2 text-slate-600 leading-relaxed font-light text-[15px]" data-tr="Parametre taraması, hata analizi ve sonuçların raporlanması." data-en="Parameter scanning, failure analysis, and reporting of results." data-zh="参数扫描、故障分析和结果报告。">
-                            Parametre taraması, hata analizi ve sonuçların raporlanması.
-                        </dd>
-                    </div>
-
-                    <!-- Madde 5 -->
-                    <div class="py-6 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 items-start">
-                        <dt class="text-slate-900 font-bold font-space text-lg flex items-center gap-3" data-tr="Kalite ve ölçüm" data-en="Quality and Metrology" data-zh="质量与计量">
-                            <div class="hidden md:block w-2 h-2 rounded-none bg-sky-500"></div>
-                            Kalite ve ölçüm
-                        </dt>
-                        <dd class="md:col-span-2 text-slate-600 leading-relaxed font-light text-[15px]" data-tr="Kalite kontrol, metroloji ve ölçüm laboratuvarları." data-en="Quality control, metrology, and measurement laboratories." data-zh="质量控制、计量和测量实验室。">
-                            Kalite kontrol, metroloji ve ölçüm laboratuvarları.
-                        </dd>
-                    </div>
-                </dl>
-            </div>
-        </section>
-
-        <!-- Projects Section (3 Columns Grid - Solid Panels) -->
-        <section id="projeler" class="mt-32">
-            <h3 class="text-3xl font-space font-extrabold text-slate-900 uppercase tracking-widest mb-10 text-center" data-tr="Laboratuvar & Tasarım Çalışmaları" data-en="Laboratory & Design Work" data-zh="实验室与设计工作">Laboratuvar & Tasarım Çalışmaları</h3>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                
-                <!-- Project 1: SiO2 -->
-                <div class="solid-panel flex flex-col group">
-                    <div class="h-56 bg-slate-100 p-4 flex justify-center items-center border-b border-slate-200 overflow-hidden">
-                        <img src="sio2.png" alt="SiO2" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500 mix-blend-multiply">
-                    </div>
-                    <div class="p-8 flex-grow flex flex-col">
-                        <span class="inline-block text-[10px] font-bold text-sky-700 uppercase tracking-widest font-space bg-sky-100 px-2 py-1 mb-4 w-max" data-tr="BİTİRME PROJESİ" data-en="GRADUATION PROJECT" data-zh="毕业设计">BİTİRME PROJESİ</span>
-                        <h4 class="text-lg font-bold font-space text-slate-900 mb-3" data-tr="SiO2 İnce Film Sentezi" data-en="SiO2 Thin Film Synthesis" data-zh="SiO2 薄膜合成">SiO2 İnce Film Sentezi</h4>
-                        <p class="text-sm text-slate-600 leading-relaxed flex-grow" data-tr="SLG alttaşlar üzerine RF Magnetron Sputtering yöntemiyle SiO₂ ince film kaplamaları gerçekleştirdim. Çalışmalarım sırasında vakum koşullarını takip ederek farklı kaplama parametrelerinin yüzey özellikleri üzerindeki etkilerini inceledim. Elde ettiğim sonuçları yapısal karakterizasyon süreçleriyle değerlendirme konusunda deneyim kazandım. Bu çıktılarla NanoTR-19'da poster sunumu gerçekleştirdim." data-en="I performed SiO₂ thin film coatings on SLG substrates using the RF Magnetron Sputtering method. During my studies, I examined the effects of different coating parameters on surface properties by monitoring vacuum conditions. I gained experience in evaluating the results I obtained through structural characterization processes. With these outputs, I made a poster presentation at NanoTR-19." data-zh="我使用射频磁控溅射方法在SLG基底上进行了SiO₂薄膜涂层。在我的研究中，我通过监测真空条件检查了不同涂层参数对表面性能的影响。我在通过结构表征过程评估所获得的结果方面积累了经验。利用这些成果，我在NanoTR-19上进行了海报展示。">SLG alttaşlar üzerine RF Magnetron Sputtering yöntemiyle SiO₂ ince film kaplamaları gerçekleştirdim. Çalışmalarım sırasında vakum koşullarını takip ederek farklı kaplama parametrelerinin yüzey özellikleri üzerindeki etkilerini inceledim. Elde ettiğim sonuçları yapısal karakterizasyon süreçleriyle değerlendirme konusunda deneyim kazandım. Bu çıktılarla NanoTR-19'da poster sunumu gerçekleştirdim.</p>
-                    </div>
-                </div>
-
-                <!-- Project 2: PCB -->
-                <div class="solid-panel flex flex-col group">
-                    <div class="h-56 bg-slate-50 p-6 flex justify-center items-center border-b border-slate-200 overflow-hidden">
-                        <img src="pcb.png" alt="PCB" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="p-8 flex-grow flex flex-col">
-                        <span class="inline-block text-[10px] font-bold text-purple-700 uppercase tracking-widest font-space bg-purple-100 px-2 py-1 mb-4 w-max" data-tr="DONANIM TASARIMI" data-en="HARDWARE DESIGN" data-zh="硬件设计">DONANIM TASARIMI</span>
-                        <h4 class="text-lg font-bold font-space text-slate-900 mb-3" data-tr="Ultrasonik Sürücü PCB Tasarımı" data-en="Ultrasonic Driver PCB Design" data-zh="超声波驱动器 PCB 设计">Ultrasonik Sürücü PCB Tasarımı</h4>
-                        <p class="text-sm text-slate-600 leading-relaxed flex-grow" data-tr="Kavitasyon deneylerinde piezoelektrik dönüştürücüleri çalıştırmak için kendi PCB devremi tasarladım. Devrenin beklenen performansını değerlendirmek ve olası sorunları önceden görmek amacıyla üretim öncesinde zaman domeninde sinyal simülasyonları gerçekleştirdim." data-en="I designed my own PCB circuit to drive piezoelectric transducers in cavitation experiments. I performed time-domain signal simulations prior to production in order to evaluate the expected performance of the circuit and to foresee potential problems." data-zh="我设计了自己的PCB电路来驱动空化实验中的压电换能器。在生产之前，我进行了时域信号仿真，以评估电路的预期性能并预见潜在问题。">Kavitasyon deneylerinde piezoelektrik dönüştürücüleri çalıştırmak için kendi PCB devremi tasarladım. Devrenin beklenen performansını değerlendirmek ve olası sorunları önceden görmek amacıyla üretim öncesinde zaman domeninde sinyal simülasyonları gerçekleştirdim.</p>
-                    </div>
-                </div>
-
-                <!-- Project 3: MATLAB Simulation -->
-                <div class="solid-panel flex flex-col group">
-                    <div class="h-56 bg-slate-900 flex justify-center items-center border-b border-slate-200 overflow-hidden relative">
-                        
-                        <!-- Light Source Beam -->
-                        <div class="absolute w-full h-full pointer-events-none">
-                            <div class="w-[200%] h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-40 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45 animate-beam"></div>
-                        </div>
-                        
-                        <!-- Nanoparticles & Emission -->
-                        <div class="relative flex gap-8 items-center z-10">
-                            <!-- Metal NP 1 -->
-                            <div class="relative flex justify-center items-center group-hover:scale-105 transition-transform duration-700">
-                                <div class="absolute w-16 h-16 rounded-full bg-cyan-500/20 blur-xl animate-pulse"></div>
-                                <div class="w-6 h-6 rounded-full bg-gradient-to-br from-slate-300 via-slate-400 to-slate-600 shadow-md"></div>
-                            </div>
-                            
-                            <!-- Interaction Waves -->
-                            <div class="flex gap-1.5 opacity-60">
-                                <div class="w-1 h-3 bg-cyan-400/80 rounded-none animate-pulse"></div>
-                                <div class="w-1 h-5 bg-cyan-300 rounded-none animate-pulse" style="animation-delay: 0.2s"></div>
-                                <div class="w-1 h-3 bg-cyan-400/80 rounded-none animate-pulse" style="animation-delay: 0.4s"></div>
-                            </div>
-
-                            <!-- Metal NP 2 -->
-                            <div class="relative flex justify-center items-center group-hover:scale-105 transition-transform duration-700">
-                                <div class="absolute w-16 h-16 rounded-full bg-indigo-500/20 blur-xl animate-pulse" style="animation-delay: 0.3s;"></div>
-                                <div class="w-6 h-6 rounded-full bg-gradient-to-br from-amber-200 via-amber-400 to-amber-600 shadow-md"></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="p-8 flex-grow flex flex-col bg-white">
-                        <span class="inline-block text-[10px] font-bold text-orange-700 uppercase tracking-widest font-space bg-orange-100 px-2 py-1 mb-4 w-max" data-tr="SİMÜLASYON / MATLAB" data-en="SIMULATION / MATLAB" data-zh="仿真 / MATLAB">SİMÜLASYON / MATLAB</span>
-                        <h4 class="text-lg font-bold font-space text-slate-900 mb-3" data-tr="Plazmonik Emisyon Simülasyonu" data-en="Plasmonic Emission Simulation" data-zh="等离子体发射模拟">Plazmonik Emisyon Simülasyonu</h4>
-                        <p class="text-sm text-slate-600 leading-relaxed flex-grow" data-tr="Işık-madde etkileşimlerini teorik düzlemde incelemek amacıyla, iki metal nanoparçacığın ışık altındaki emisyon (ışıma) davranışını MATLAB ortamında modelledim ve simüle ettim." data-en="To examine light-matter interactions on a theoretical level, I modeled and simulated the emission behavior of two metal nanoparticles under light in the MATLAB environment." data-zh="为了在理论层面上检查光与物质的相互作用，我在MATLAB环境中建模并模拟了光照下两个金属纳米粒子的发射行为。">Işık-madde etkileşimlerini teorik düzlemde incelemek amacıyla, iki metal nanoparçacığın ışık altındaki emisyon (ışıma) davranışını MATLAB ortamında modelledim ve simüle ettim.</p>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- Hobiler / Atölye -->
-        <section id="atolye" class="mt-32">
-            <h3 class="text-3xl font-space font-extrabold text-slate-900 uppercase tracking-widest mb-10 text-center" data-tr="Çalışma Masası Dışında" data-en="Beyond the Desk" data-zh="办公桌之外">Çalışma Masası Dışında</h3>
-            
-            <div class="solid-panel p-8 md:p-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                
-                <div class="relative group overflow-hidden border border-slate-300">
-                    <img src="3dprint.jpeg" alt="3D Print" class="w-full h-auto object-cover max-h-[400px] group-hover:scale-105 transition-transform duration-700">
-                    <div class="absolute bottom-0 left-0 right-0 bg-white/90 p-4 border-t border-slate-300">
-                        <p class="text-slate-900 text-xs font-bold tracking-widest uppercase font-space text-center" data-tr="Fiziksel Prototipleme" data-en="Physical Prototyping" data-zh="物理原型制作">Fiziksel Prototipleme</p>
-                    </div>
-                </div>
-                
+        <!-- 01. HAKKIMDA & AKADEMİK BİLDİRİLER -->
+        <section id="hakkimda" class="mt-28 grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            <!-- Mühendislik Yaklaşımım -->
+            <div class="lg:col-span-7 tech-card bg-white/90 dark:bg-lab-900/90 border border-slate-200 dark:border-slate-800 p-8 md:p-10 flex flex-col justify-between">
                 <div>
-                    <h4 class="text-2xl font-bold font-space text-slate-900 mb-4" data-tr="İlgi Alanlarım" data-en="My Interests" data-zh="我的兴趣">İlgi Alanlarım</h4>
-                    <p class="text-slate-600 leading-relaxed mb-8 font-light text-base" data-tr="Boş zamanlarımda üretmeyi ve fikirlerimi somut projelere dönüştürmeyi seviyorum. Özellikle mekanik tasarımlar yapıp bunları 3D yazıcıyla hayata geçirmekten keyif alıyorum. Karar alma süreçlerine duyduğum ilgi nedeniyle oyun teorisi üzerine okumalar yapıyor, stratejik düşünme ve odaklanma becerilerimi geliştirmek için satranç ve tenisle ilgileniyorum." data-en="In my free time, I like to produce and turn my ideas into concrete projects. I especially enjoy making mechanical designs and bringing them to life with a 3D printer. Due to my interest in decision-making processes, I read about game theory, and I am interested in chess and tennis to improve my strategic thinking and focusing skills." data-zh="在业余时间，我喜欢制作并将我的想法转化为具体项目。我特别喜欢进行机械设计并用3D打印机将它们变为现实。出于对决策过程的兴趣，我阅读有关博弈论的书籍，并且我对国际象棋和网球感兴趣，以提高我的战略思维和专注能力。">
-                        Boş zamanlarımda üretmeyi ve fikirlerimi somut projelere dönüştürmeyi seviyorum. Özellikle mekanik tasarımlar yapıp bunları 3D yazıcıyla hayata geçirmekten keyif alıyorum. Karar alma süreçlerine duyduğum ilgi nedeniyle oyun teorisi üzerine okumalar yapıyor, stratejik düşünme ve odaklanma becerilerimi geliştirmek için satranç ve tenisle ilgileniyorum.
-                    </p>
+                    <div class="text-xs font-mono text-sky-500 uppercase tracking-widest mb-2" data-tr="// 01. HAKKIMDA" data-en="// 01. ABOUT ME" data-zh="// 01. 关于我">// 01. HAKKIMDA</div>
+                    <h3 class="text-2xl md:text-3xl font-space font-bold text-slate-900 dark:text-white mb-6" 
+                        data-tr="Temel Fizik Prensiplerini Laboratuvar Pratiğiyle Buluşturmak" 
+                        data-en="Connecting Fundamental Physics with Laboratory Practice" 
+                        data-zh="将基础物理原理与实验室实践相结合">Temel Fizik Prensiplerini Laboratuvar Pratiğiyle Buluşturmak</h3>
                     
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="flex items-center gap-4 p-4 bg-slate-50 border border-slate-200 hover:border-sky-400 transition-colors">
-                            <span class="text-2xl">🎲</span>
-                            <span class="text-slate-800 font-bold text-sm leading-tight" data-tr="Oyun Teorisi" data-en="Game Theory" data-zh="博弈论">Oyun Teorisi</span>
+                    <div class="space-y-4 text-slate-600 dark:text-slate-300 leading-relaxed text-[15px] md:text-base">
+                        <p data-tr="Fizik mühendisliği eğitimim boyunca bir cihazın veya sistemin yalnızca nasıl kullanıldığını değil, arkasındaki malzeme özelliklerini ve fiziksel prensipleri de anlamaya gayret ettim. Örneğin bir kaplama prosesinde vakum basıncı değiştiğinde yüzey yapısının bundan nasıl etkilendiğini ya da bir sürücü devresinde sinyalin neden değiştiğini temel fizik yasalarıyla incelemek bana her zaman heyecan veriyor."
+                           data-en="Throughout my physics engineering education, I have always strived to understand not just how to operate an instrument, but also the underlying material properties and physical principles. Examining how shifts in vacuum pressure affect surface morphology during coating, or analyzing signal behavior in a driver circuit through fundamental physical laws, genuinely excites me."
+                           data-zh="在物理工程的学习过程中，我始终努力不仅掌握仪器设备的操作方法，更去理解其背后的材料特性与物理原理。通过基础物理定律去探究涂层过程中真空度变化如何影响表面形貌，或者分析驱动电路中的信号变化，总是让我充满热情。">
+                            Fizik mühendisliği eğitimim boyunca bir cihazın veya sistemin yalnızca nasıl kullanıldığını değil, arkasındaki malzeme özelliklerini ve fiziksel prensipleri de anlamaya gayret ettim. Örneğin bir kaplama prosesinde vakum basıncı değiştiğinde yüzey yapısının bundan nasıl etkilendiğini ya da bir sürücü devresinde sinyalin neden değiştiğini temel fizik yasalarıyla incelemek bana her zaman heyecan veriyor.
+                        </p>
+                        <p data-tr="Optik, katı hâl fiziği ve yarıiletken teknolojileri üzerine aldığım teorik dersleri, PVD ince film kaplama çalışmaları ve SEM, XRD, FTIR, Raman gibi karakterizasyon süreçleriyle destekledim. Kariyerimin başında bir mühendis olarak yeni teknikler öğrenmeye, laboratuvar ve Ar-Ge süreçlerinde sorumluluk almaya ve çalıştığım ekiple birlikte üretmeye oldukça hevesliyim."
+                           data-en="I complemented my coursework in optics, solid-state physics, and semiconductors with hands-on laboratory work in PVD thin-film deposition and material characterization using SEM, XRD, FTIR, and Raman spectroscopy. As an early-career engineer, I am eager to keep learning, take responsibility in R&D and testing workflows, and contribute to a collaborative engineering team."
+                           data-zh="我将光学、固体物理和半导体领域的理论课程与PVD薄膜沉积实验以及SEM、XRD、FTIR和拉曼光谱等材料表征实践相结合。作为一名处于职业生涯起步阶段的工程师，我非常渴望学习新技术、在研发与测试流程中承担责任，并与团队共同创造价值。">
+                            Optik, katı hâl fiziği ve yarıiletken teknolojileri üzerine aldığım teorik dersleri, PVD ince film kaplama çalışmaları ve SEM, XRD, FTIR, Raman gibi karakterizasyon süreçleriyle destekledim. Kariyerimin başında bir mühendis olarak yeni teknikler öğrenmeye, laboratuvar ve Ar-Ge süreçlerinde sorumluluk almaya ve çalıştığım ekiple birlikte üretmeye oldukça hevesliyim.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-slate-500 dark:text-slate-400">
+                    <span>ANKARA, TÜRKİYE</span>
+                    <span>HACETTEPE ÜNİVERSİTESİ</span>
+                    <span class="text-sky-600 dark:text-sky-400">FİZİK MÜHENDİSLİĞİ</span>
+                </div>
+            </div>
+
+            <!-- Akademik Bildiriler ve Sertifikalar -->
+            <div class="lg:col-span-5 tech-card bg-white/90 dark:bg-lab-900/90 border border-slate-200 dark:border-slate-800 p-8 md:p-10 flex flex-col justify-between">
+                <div>
+                    <div class="text-xs font-mono text-sky-500 uppercase tracking-widest mb-2" data-tr="// AKADEMİK GEÇMİŞ" data-en="// ACADEMIC BACKGROUND" data-zh="// 学术背景">// AKADEMİK GEÇMİŞ</div>
+                    <h3 class="text-2xl font-space font-bold text-slate-900 dark:text-white mb-6" data-tr="Kongre Bildirileri & Sertifikalar" data-en="Conference Papers & Certifications" data-zh="会议论文与专业证书">Kongre Bildirileri & Sertifikalar</h3>
+
+                    <div class="space-y-5">
+                        <!-- Bildiri 1 -->
+                        <div class="p-4 bg-slate-50 dark:bg-lab-950/80 border-l-2 border-sky-500">
+                            <div class="flex justify-between items-center text-[11px] font-mono text-sky-600 dark:text-sky-400 mb-1">
+                                <span>NANOTR-19 KONFERANSI</span>
+                                <span data-tr="POSTER SUNUMU" data-en="POSTER PRESENTATION" data-zh="海报展示">POSTER SUNUMU</span>
+                            </div>
+                            <p class="text-sm font-semibold text-slate-900 dark:text-slate-100 leading-snug">
+                                "Synthesis of SiO₂ Thin Films By RF Magnetron Sputtering..."
+                            </p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1" 
+                               data-tr="SLG alttaşlar üzerinde RF Magnetron Sputtering ile büyütülen SiO₂ ince filmlerin yapısal, optik ve buğulanma önleyici (anti-fogging) yüzey analizi."
+                               data-en="Structural, optical, and anti-fogging surface analysis of SiO₂ thin films grown on SLG substrates via RF Magnetron Sputtering."
+                               data-zh="通过射频磁控溅射在SLG基底上生长的SiO₂薄膜的结构、光学及防雾表面特性分析。">
+                                SLG alttaşlar üzerinde RF Magnetron Sputtering ile büyütülen SiO₂ ince filmlerin yapısal, optik ve buğulanma önleyici (anti-fogging) yüzey analizi.
+                            </p>
                         </div>
-                        <div class="flex items-center gap-4 p-4 bg-slate-50 border border-slate-200 hover:border-sky-400 transition-colors">
-                            <span class="text-2xl">♟️</span>
-                            <span class="text-slate-800 font-bold text-sm" data-tr="Satranç" data-en="Chess" data-zh="国际象棋">Satranç</span>
+
+                        <!-- Bildiri 2 -->
+                        <div class="p-4 bg-slate-50 dark:bg-lab-950/80 border-l-2 border-cyan-500">
+                            <div class="flex justify-between items-center text-[11px] font-mono text-cyan-600 dark:text-cyan-400 mb-1">
+                                <span>TFD 41. ULUSLARARASI FİZİK KONGRESİ</span>
+                                <span data-tr="SÖZLÜ SUNUM" data-en="ORAL PRESENTATION" data-zh="口头报告">SÖZLÜ SUNUM</span>
+                            </div>
+                            <p class="text-sm font-semibold text-slate-900 dark:text-slate-100 leading-snug">
+                                "Design of an Ultrasonic Source and Sonochemical Synthesis..."
+                            </p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1"
+                               data-tr="Akustik kavitasyon ve sonokimyasal sentez deneyleri için ultrasonik güç kaynağı / sürücü devresi tasarımı ve uygulaması."
+                               data-en="Ultrasonic power driver circuit design and experimental implementation for acoustic cavitation and sonochemical synthesis."
+                               data-zh="用于声空化和声化学合成实验的超声波电源驱动电路设计与实现。">
+                                Akustik kavitasyon ve sonokimyasal sentez deneyleri için ultrasonik güç kaynağı / sürücü devresi tasarımı ve uygulaması.
+                            </p>
                         </div>
-                        <div class="flex items-center gap-4 p-4 bg-slate-50 border border-slate-200 hover:border-sky-400 transition-colors">
-                            <span class="text-2xl">🎾</span>
-                            <span class="text-slate-800 font-bold text-sm" data-tr="Kort Tenisi" data-en="Tennis" data-zh="网球">Kort Tenisi</span>
+                    </div>
+                </div>
+
+                <!-- Sertifikalar -->
+                <div class="mt-6 pt-5 border-t border-slate-200 dark:border-slate-800">
+                    <h4 class="text-[11px] font-mono uppercase tracking-wider text-slate-400 mb-3" data-tr="SERTİFİKA VE EĞİTİMLER" data-en="CERTIFICATES & TRAINING" data-zh="培训与证书">SERTİFİKA VE EĞİTİMLER</h4>
+                    <ul class="space-y-2 text-xs text-slate-700 dark:text-slate-300">
+                        <li class="flex items-center gap-2.5">
+                            <span class="w-1.5 h-1.5 bg-sky-500"></span>
+                            <span data-tr="İş Sağlığı ve Güvenliği (İSG / OHS) Sertifikası (2025)" data-en="Occupational Health and Safety (OHS) Certificate (2025)" data-zh="职业健康与安全 (OHS) 证书 (2025)">İş Sağlığı ve Güvenliği (İSG / OHS) Sertifikası (2025)</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <span class="w-1.5 h-1.5 bg-sky-500"></span>
+                            <span data-tr="4 Adet Mesleki ve Teknik Eğitim Tam Katılım Sertifikası" data-en="4 Professional & Technical Training Full Attendance Certificates" data-zh="4份专业技术培训全勤证书">4 Adet Mesleki ve Teknik Eğitim Tam Katılım Sertifikası</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 02. ÇALIŞABİLECEĞİM VE KATKI SUNABİLECEĞİM ALANLAR -->
+        <section id="yetkinlikler" class="mt-28">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <div class="text-xs font-mono text-sky-500 uppercase tracking-widest mb-2" data-tr="// 02. ÇALIŞMA ALANLARI" data-en="// 02. TECHNICAL AREAS" data-zh="// 02. 技术领域">// 02. ÇALIŞMA ALANLARI</div>
+                    <h3 class="text-3xl font-space font-bold text-slate-900 dark:text-white" data-tr="Size Hangi Alanlarda Katkı Sağlayabilirim?" data-en="How I Can Contribute to Your Team" data-zh="我能为您的团队提供哪些支持？">Size Hangi Alanlarda Katkı Sağlayabilirim?</h3>
+                </div>
+                <p class="text-xs font-mono text-slate-500 dark:text-slate-400" data-tr="SAVUNMA SANAYİİ · YARIİLETKEN · OPTİK · MALZEME AR-GE" data-en="DEFENSE · SEMICONDUCTOR · OPTICS · MATERIALS R&D" data-zh="国防工业 · 半导体 · 光学 · 材料研发">SAVUNMA SANAYİİ · YARIİLETKEN · OPTİK · MALZEME AR-GE</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Kart 1 -->
+                <div class="tech-card bg-white/90 dark:bg-lab-900/90 border border-slate-200 dark:border-slate-800 p-7 hover:border-sky-500/60">
+                    <div class="text-xs font-mono text-sky-500 mb-3">01 // PVD & VAKUM</div>
+                    <h4 class="text-lg font-space font-bold text-slate-900 dark:text-white mb-2.5" data-tr="İnce Film ve Kaplama Prosesleri" data-en="Thin-Film & Coating Processes" data-zh="薄膜与涂层工艺">İnce Film ve Kaplama Prosesleri</h4>
+                    <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed"
+                       data-tr="Optik, yarıiletken, sensör ve savunma uygulamalarında kullanılan vakum ve PVD (RF Magnetron Sputtering) kaplama süreçlerinde alttaş hazırlığı, vakum takibi ve kaplama parametrelerinin incelenmesi."
+                       data-en="Substrate preparation, vacuum monitoring, and parameter optimization in PVD (RF Magnetron Sputtering) coating processes for optics, semiconductors, sensors, and defense applications."
+                       data-zh="应用于光学、半导体、传感器和国防领域的真空与PVD（射频磁控溅射）涂层工艺：基底准备、真空监控及工艺参数研究。">
+                        Optik, yarıiletken, sensör ve savunma uygulamalarında kullanılan vakum ve PVD (RF Magnetron Sputtering) kaplama süreçlerinde alttaş hazırlığı, vakum takibi ve kaplama parametrelerinin incelenmesi.
+                    </p>
+                </div>
+
+                <!-- Kart 2 -->
+                <div class="tech-card bg-white/90 dark:bg-lab-900/90 border border-slate-200 dark:border-slate-800 p-7 hover:border-sky-500/60">
+                    <div class="text-xs font-mono text-sky-500 mb-3">02 // YARIİLETKEN</div>
+                    <h4 class="text-lg font-space font-bold text-slate-900 dark:text-white mb-2.5" data-tr="Yarıiletken Üretim Süreçleri" data-en="Semiconductor Manufacturing Processes" data-zh="半导体制造工艺">Yarıiletken Üretim Süreçleri</h4>
+                    <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed"
+                       data-tr="Yarıiletken fiziği ve üretim adımları (litografi, ince film kaplama, aşındırma) konusunda teorik altyapı; oksit ve dielektrik katmanların (SiO₂ vb.) laboratuvar ortamında üretimi ve incelenmesi."
+                       data-en="Solid theoretical background in semiconductor physics and fabrication steps (lithography, thin-film deposition, etching), supported by laboratory practice in growing oxide layers such as SiO₂."
+                       data-zh="具备半导体物理与制造工艺（光刻、薄膜沉积、刻蚀）的理论基础，并在实验室环境中实践过氧化物层（如SiO₂）的制备与分析。">
+                        Yarıiletken fiziği ve üretim adımları (litografi, ince film kaplama, aşındırma) konusunda teorik altyapı; oksit ve dielektrik katmanların (SiO₂ vb.) laboratuvar ortamında üretimi ve incelenmesi.
+                    </p>
+                </div>
+
+                <!-- Kart 3 -->
+                <div class="tech-card bg-white/90 dark:bg-lab-900/90 border border-slate-200 dark:border-slate-800 p-7 hover:border-sky-500/60">
+                    <div class="text-xs font-mono text-sky-500 mb-3">03 // KARAKTERİZASYON</div>
+                    <h4 class="text-lg font-space font-bold text-slate-900 dark:text-white mb-2.5" data-tr="Malzeme Karakterizasyonu" data-en="Material Characterization" data-zh="材料表征">Malzeme Karakterizasyonu</h4>
+                    <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed"
+                       data-tr="Analiz ve test laboratuvarlarında SEM, XRD, FTIR, Raman, UV-Vis spektroskopisi, profilometri ve temas açısı cihazlarıyla ölçüm gerçekleştirme ve sonuçları değerlendirme."
+                       data-en="Performing measurements and evaluating experimental data using SEM, XRD, FTIR, Raman, UV-Vis spectroscopy, profilometry, and contact angle instruments."
+                       data-zh="在分析测试实验室中使用SEM、XRD、FTIR、拉曼、UV-Vis光谱、轮廓仪和接触角测量仪进行测试并评估数据。">
+                        Analiz ve test laboratuvarlarında SEM, XRD, FTIR, Raman, UV-Vis spektroskopisi, profilometri ve temas açısı cihazlarıyla ölçüm gerçekleştirme ve sonuçları değerlendirme.
+                    </p>
+                </div>
+
+                <!-- Kart 4 -->
+                <div class="tech-card bg-white/90 dark:bg-lab-900/90 border border-slate-200 dark:border-slate-800 p-7 hover:border-sky-500/60">
+                    <div class="text-xs font-mono text-sky-500 mb-3">04 // ELEKTRONİK & TEST</div>
+                    <h4 class="text-lg font-space font-bold text-slate-900 dark:text-white mb-2.5" data-tr="Donanım Tasarımı & Sinyal Testi" data-en="Hardware Design & Signal Testing" data-zh="硬件设计与信号测试">Donanım Tasarımı & Sinyal Testi</h4>
+                    <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed"
+                       data-tr="Deney düzenekleri için sürücü devre ve PCB çizimi (EasyEDA), üretim öncesi zaman domeni sinyal simülasyonları ve donanım tepki/gecikme süresi ölçümleri."
+                       data-en="Designing custom driver circuits and PCBs (EasyEDA) for experimental setups, running pre-production time-domain signal simulations, and testing hardware response latency."
+                       data-zh="为实验装置设计驱动电路与PCB（EasyEDA），进行投产前的时域信号仿真以及硬件响应延迟测试。">
+                        Deney düzenekleri için sürücü devre ve PCB çizimi (EasyEDA), üretim öncesi zaman domeni sinyal simülasyonları ve donanım tepki/gecikme süresi ölçümleri.
+                    </p>
+                </div>
+
+                <!-- Kart 5 -->
+                <div class="tech-card bg-white/90 dark:bg-lab-900/90 border border-slate-200 dark:border-slate-800 p-7 hover:border-sky-500/60">
+                    <div class="text-xs font-mono text-sky-500 mb-3">05 // SİMÜLASYON</div>
+                    <h4 class="text-lg font-space font-bold text-slate-900 dark:text-white mb-2.5" data-tr="Fiziksel Modelleme ve Veri Analizi" data-en="Physical Modeling & Data Analysis" data-zh="物理建模与数据分析">Fiziksel Modelleme ve Veri Analizi</h4>
+                    <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed"
+                       data-tr="MATLAB ve Python kullanarak ışık-madde etkileşimlerinin modellenmesi, deneysel verilerin işlenmesi ve grafiksel olarak raporlanması."
+                       data-en="Modeling light-matter interactions and processing, visualizing, and reporting experimental datasets using MATLAB and Python."
+                       data-zh="使用MATLAB和Python对光与物质相互作用进行建模，并对实验数据进行处理、可视化与报告编写。">
+                        MATLAB ve Python kullanarak ışık-madde etkileşimlerinin modellenmesi, deneysel verilerin işlenmesi ve grafiksel olarak raporlanması.
+                    </p>
+                </div>
+
+                <!-- Kart 6 -->
+                <div class="tech-card bg-white/90 dark:bg-lab-900/90 border border-slate-200 dark:border-slate-800 p-7 hover:border-sky-500/60">
+                    <div class="text-xs font-mono text-sky-500 mb-3">06 // AR-GE & KALİTE</div>
+                    <h4 class="text-lg font-space font-bold text-slate-900 dark:text-white mb-2.5" data-tr="Ar-Ge, Kalite Kontrol ve Metroloji" data-en="R&D, Quality Control & Metrology" data-zh="研发、质量控制与计量">Ar-Ge, Kalite Kontrol ve Metroloji</h4>
+                    <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed"
+                       data-tr="Kalite kontrol ve ölçüm laboratuvarlarında parametre taraması, hata analizi ve deney sonuçlarının düzenli şekilde dokümante edilmesi."
+                       data-en="Parameter scanning, failure analysis, and systematic documentation of test results in quality control, metrology, and R&D laboratories."
+                       data-zh="在质量控制、计量和研发实验室中进行参数扫描、故障分析以及测试结果的规范化文档记录。">
+                        Kalite kontrol ve ölçüm laboratuvarlarında parametre taraması, hata analizi ve deney sonuçlarının düzenli şekilde dokümante edilmesi.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03. LABORATUVAR VE TASARIM ÇALIŞMALARI (PROJELER) -->
+        <section id="projeler" class="mt-28">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <div class="text-xs font-mono text-sky-500 uppercase tracking-widest mb-2" data-tr="// 03. PROJELER & ÇALIŞMALAR" data-en="// 03. PROJECTS & LAB WORK" data-zh="// 03. 项目与实验研究">// 03. PROJELER & ÇALIŞMALAR</div>
+                    <h3 class="text-3xl font-space font-bold text-slate-900 dark:text-white" data-tr="Laboratuvar ve Tasarım Çalışmaları" data-en="Laboratory & Design Work" data-zh="实验室与设计工作">Laboratuvar ve Tasarım Çalışmaları</h3>
+                </div>
+                <p class="text-xs font-mono text-slate-500 dark:text-slate-400" data-tr="Görsellerin üzerine tıklayarak büyütebilirsiniz" data-en="Click on any image to enlarge" data-zh="点击图片可放大查看">Görsellerin üzerine tıklayarak büyütebilirsiniz</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                <!-- PROJE 1: SiO2 İnce Film Sentezi -->
+                <article class="tech-card bg-white/95 dark:bg-lab-900/95 border border-slate-200 dark:border-slate-800 flex flex-col justify-between overflow-hidden group">
+                    <div>
+                        <div class="relative h-60 bg-slate-100 dark:bg-lab-950 border-b border-slate-200 dark:border-slate-800 overflow-hidden cursor-zoom-in" onclick="openLightbox(this.querySelector('img').src, 'RF Magnetron Sputtering ile üretilen SiO₂ ince filmlerin buğulanma önleyici (anti-fogging) yüzey performansı')">
+                            <img src="sio2.png" onerror="this.onerror=null; this.src='sio2.jpg';" alt="SiO2 İnce Film Anti-Fogging Testi" class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute top-3 left-3 bg-lab-950/85 text-sky-400 border border-sky-500/30 px-2.5 py-1 text-[10px] font-mono uppercase">
+                                PVD // RF SPUTTERING
+                            </div>
+                            <div class="absolute bottom-2 right-2 bg-lab-950/80 text-slate-300 px-2 py-0.5 text-[10px] font-mono">
+                                [🔍 BÜYÜT]
+                            </div>
+                        </div>
+
+                        <div class="p-7">
+                            <div class="text-[11px] font-mono text-sky-600 dark:text-sky-400 uppercase tracking-wider mb-2" data-tr="BİTİRME PROJESİ & NANOTR-19 SUNUMU" data-en="GRADUATION PROJECT & NANOTR-19" data-zh="毕业设计 & NANOTR-19 展示">BİTİRME PROJESİ & NANOTR-19 SUNUMU</div>
+                            <h4 class="text-xl font-space font-bold text-slate-900 dark:text-white mb-3" data-tr="SiO₂ İnce Film Sentezi" data-en="SiO₂ Thin-Film Synthesis" data-zh="SiO₂ 薄膜合成">SiO₂ İnce Film Sentezi</h4>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed"
+                               data-tr="SLG cam alttaşlar üzerine RF Magnetron Sputtering yöntemiyle SiO₂ ince film kaplamaları gerçekleştirdim. Vakum koşullarını ve kaplama parametrelerini takip ederek elde edilen yüzeylerin yapısal özelliklerini ve buğulanma önleyici (anti-fogging) davranışını inceledim. Bu çalışmanın çıktılarını NanoTR-19 Konferansı'nda poster sunumu olarak paylaştım."
+                               data-en="Performed SiO₂ thin-film depositions on SLG glass substrates using RF Magnetron Sputtering. Monitored vacuum conditions and deposition parameters to examine the structural properties and anti-fogging behavior of the coated surfaces, presenting the findings as a poster at the NanoTR-19 Conference."
+                               data-zh="采用射频磁控溅射法在SLG玻璃基底上进行了SiO₂薄膜沉积。通过监测真空条件与沉积参数，研究了涂层表面的结构特性与防雾（Anti-fogging）性能，并在NanoTR-19会议上进行了海报展示。">
+                                SLG cam alttaşlar üzerine RF Magnetron Sputtering yöntemiyle SiO₂ ince film kaplamaları gerçekleştirdim. Vakum koşullarını ve kaplama parametrelerini takip ederek elde edilen yüzeylerin yapısal özelliklerini ve buğulanma önleyici (anti-fogging) davranışını inceledim. Bu çalışmanın çıktılarını NanoTR-19 Konferansı'nda poster sunumu olarak paylaştım.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="px-7 py-4 border-t border-slate-200 dark:border-slate-800/80 font-mono text-[11px] text-slate-500 dark:text-slate-400 flex flex-wrap gap-2">
+                        <span>#RFMagnetron</span>
+                        <span>#SiO2</span>
+                        <span>#AntiFogging</span>
+                        <span>#ThinFilm</span>
+                    </div>
+                </article>
+
+                <!-- PROJE 2: Ultrasonik Sürücü PCB Tasarımı -->
+                <article class="tech-card bg-white/95 dark:bg-lab-900/95 border border-slate-200 dark:border-slate-800 flex flex-col justify-between overflow-hidden group">
+                    <div>
+                        <div class="relative h-60 bg-white border-b border-slate-200 dark:border-slate-800 overflow-hidden cursor-zoom-in flex items-center justify-center" onclick="openLightbox('pcb.png', 'Kavitasyon deneylerinde piezoelektrik dönüştürücüleri sürmek için tasarladığım PCB baskı devre şeması')">
+                            <img src="pcb.png" alt="Ultrasonik Sürücü PCB Tasarımı" class="max-h-full max-w-full object-contain p-5 group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute top-3 left-3 bg-lab-950/85 text-purple-400 border border-purple-500/30 px-2.5 py-1 text-[10px] font-mono uppercase">
+                                DONANIM // PCB TASARIMI
+                            </div>
+                            <div class="absolute bottom-2 right-2 bg-lab-950/80 text-slate-300 px-2 py-0.5 text-[10px] font-mono">
+                                [🔍 BÜYÜT]
+                            </div>
+                        </div>
+
+                        <div class="p-7">
+                            <div class="text-[11px] font-mono text-purple-600 dark:text-purple-400 uppercase tracking-wider mb-2" data-tr="DONANIM TASARIMI & TFD-41 SUNUMU" data-en="HARDWARE DESIGN & TFD-41" data-zh="硬件设计 & TFD-41 报告">DONANIM TASARIMI & TFD-41 SUNUMU</div>
+                            <h4 class="text-xl font-space font-bold text-slate-900 dark:text-white mb-3" data-tr="Ultrasonik Sürücü PCB Tasarımı" data-en="Ultrasonic Driver PCB Design" data-zh="超声波驱动器 PCB 设计">Ultrasonik Sürücü PCB Tasarımı</h4>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed"
+                               data-tr="Akustik kavitasyon ve sonokimyasal sentez deneylerinde piezoelektrik dönüştürücüleri çalıştırmak için bir PCB devresi tasarladım. Kartın üretim öncesinde beklenen performansını görmek ve olası hataları önlemek amacıyla zaman domeninde sinyal simülasyonları gerçekleştirdim."
+                               data-en="Designed a custom PCB circuit to drive piezoelectric transducers in acoustic cavitation and sonochemical synthesis experiments. Performed time-domain signal simulations prior to production to evaluate circuit behavior and prevent potential design issues."
+                               data-zh="设计了用于在声空化和声化学合成实验中驱动压电换能器的PCB电路。在生产前进行了时域信号仿真，以评估电路预期性能并排查潜在问题。">
+                                Akustik kavitasyon ve sonokimyasal sentez deneylerinde piezoelektrik dönüştürücüleri çalıştırmak için bir PCB devresi tasarladım. Kartın üretim öncesinde beklenen performansını görmek ve olası hataları önlemek amacıyla zaman domeninde sinyal simülasyonları gerçekleştirdim.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="px-7 py-4 border-t border-slate-200 dark:border-slate-800/80 font-mono text-[11px] text-slate-500 dark:text-slate-400 flex flex-wrap gap-2">
+                        <span>#Piezoelectric</span>
+                        <span>#Cavitation</span>
+                        <span>#PCB</span>
+                        <span>#Simülasyon</span>
+                    </div>
+                </article>
+
+                <!-- PROJE 3: İnteraktif MATLAB Plazmonik Emisyon Simülasyonu -->
+                <article class="tech-card bg-white/95 dark:bg-lab-900/95 border border-slate-200 dark:border-slate-800 flex flex-col justify-between overflow-hidden group">
+                    <div>
+                        <div class="relative h-60 bg-lab-950 border-b border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col justify-between">
+                            <canvas id="plasmonCanvas" class="w-full h-full"></canvas>
+                            <div class="absolute top-3 left-3 bg-lab-950/85 text-amber-400 border border-amber-500/30 px-2.5 py-1 text-[10px] font-mono uppercase">
+                                MATLAB // PLAZMONİK MODEL
+                            </div>
+                            <!-- Parçacık Mesafesi Kontrolü -->
+                            <div class="absolute bottom-2 inset-x-3 bg-lab-900/90 border border-slate-700 px-3 py-1.5 flex items-center gap-3 font-mono text-[10px] text-slate-300">
+                                <span class="whitespace-nowrap" data-tr="Mesafe (Gap):" data-en="Dimer Gap:" data-zh="粒子间距:">Mesafe (Gap):</span>
+                                <input id="gapSlider" type="range" min="18" max="65" value="30" class="w-full">
+                                <span id="gapValue" class="text-amber-400 font-bold whitespace-nowrap">3.0 nm</span>
+                            </div>
+                        </div>
+
+                        <div class="p-7">
+                            <div class="text-[11px] font-mono text-amber-600 dark:text-amber-400 uppercase tracking-wider mb-2" data-tr="SİMÜLASYON / MATLAB" data-en="SIMULATION / MATLAB" data-zh="数值模拟 / MATLAB">SİMÜLASYON / MATLAB</div>
+                            <h4 class="text-xl font-space font-bold text-slate-900 dark:text-white mb-3" data-tr="Plazmonik Emisyon Simülasyonu" data-en="Plasmonic Emission Simulation" data-zh="等离子体发射模拟">Plazmonik Emisyon Simülasyonu</h4>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed"
+                               data-tr="Işık-madde etkileşimlerini kuramsal olarak incelemek amacıyla, iki metal nanoparçacığın ışık altındaki emisyon (ışıma) davranışını ve aralarındaki mesafeye bağlı elektrik alan etkileşimini MATLAB ortamında modelledim."
+                               data-en="Modeled and simulated the emission behavior and distance-dependent near-field interaction of two metallic nanoparticles under light excitation in MATLAB to study light-matter interactions theoretically."
+                               data-zh="为了从理论层面研究光与物质的相互作用，在MATLAB环境中对光照下两个金属纳米粒子的发射行为及其随间距变化的近场相互作用进行了建模与仿真。">
+                                Işık-madde etkileşimlerini kuramsal olarak incelemek amacıyla, iki metal nanoparçacığın ışık altındaki emisyon (ışıma) davranışını ve aralarındaki mesafeye bağlı elektrik alan etkileşimini MATLAB ortamında modelledim.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="px-7 py-4 border-t border-slate-200 dark:border-slate-800/80 font-mono text-[11px] text-slate-500 dark:text-slate-400 flex flex-wrap gap-2">
+                        <span>#MATLAB</span>
+                        <span>#Plasmonics</span>
+                        <span>#Optik</span>
+                        <span>#Nanoparçacık</span>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- 04. ÇALIŞMA MASASI DIŞINDA / İLGİ ALANLARI -->
+        <section id="atolye" class="mt-28">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <div class="text-xs font-mono text-sky-500 uppercase tracking-widest mb-2" data-tr="// 04. ÇALIŞMA MASASI DIŞINDA" data-en="// 04. BEYOND THE DESK" data-zh="// 04. 实验室之外">// 04. ÇALIŞMA MASASI DIŞINDA</div>
+                    <h3 class="text-3xl font-space font-bold text-slate-900 dark:text-white" data-tr="Prototipleme, Donanım İncelemeleri ve İlgi Alanlarım" data-en="Prototyping, Hardware Testing & Personal Interests" data-zh="原型制作、硬件测试与个人兴趣">Prototipleme, Donanım İncelemeleri ve İlgi Alanlarım</h3>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <!-- Sol: İki Fotoğraf (xlat.jpg ve 3dprint.jpeg) -->
+                <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <!-- Görsel 1: XLAT Donanım Gecikme Analizi -->
+                    <div class="tech-card bg-white/95 dark:bg-lab-900/95 border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col justify-between group">
+                        <div class="relative h-64 bg-lab-950 overflow-hidden cursor-zoom-in" onclick="openLightbox('xlat.jpg', 'XLAT test cihazı ile donanım tepki ve gecikme süresi (latency) ölçümü')">
+                            <img src="xlat.jpg" alt="XLAT Donanım Gecikme Ölçümü" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute top-3 left-3 bg-lab-950/85 text-emerald-400 border border-emerald-500/30 px-2.5 py-1 text-[10px] font-mono">
+                                ÖLÇÜM // XLAT TESTİ
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <h4 class="font-space font-bold text-base text-slate-900 dark:text-white mb-1.5" data-tr="Donanım Gecikme (Latency) Ölçümleri" data-en="Hardware Latency Measurements" data-zh="硬件延迟测试">Donanım Gecikme (Latency) Ölçümleri</h4>
+                            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed"
+                               data-tr="Elektronik cihazların çalışma yapısını incelemeyi seviyorum. XLAT analizörü ile devre üzerindeki anahtar ve sensörlerin tıklama/hareket gecikme sürelerini ölçerek donanım performansını test ediyorum."
+                               data-en="I enjoy exploring how electronic devices perform under the hood, using an XLAT analyzer to measure click and motion response times across switches and sensors."
+                               data-zh="我喜欢探究电子设备的内部工作表现，使用XLAT分析仪测量微动开关与传感器的点击和运动响应时间。">
+                                Elektronik cihazların çalışma yapısını incelemeyi seviyorum. XLAT analizörü ile devre üzerindeki anahtar ve sensörlerin tıklama/hareket gecikme sürelerini ölçerek donanım performansını test ediyorum.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Görsel 2: 3D Yazıcı ile Mekanik Prototipleme -->
+                    <div class="tech-card bg-white/95 dark:bg-lab-900/95 border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col justify-between group">
+                        <div class="relative h-64 bg-lab-950 overflow-hidden cursor-zoom-in" onclick="openLightbox('3dprint.jpeg', '3B yazıcı ile mekanik tasarım ve fiziksel prototipleme çalışmaları')">
+                            <img src="3dprint.jpeg" alt="3D Yazıcı Fiziksel Prototipleme" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute top-3 left-3 bg-lab-950/85 text-sky-400 border border-sky-500/30 px-2.5 py-1 text-[10px] font-mono">
+                                TASARIM // 3B YAZICI
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <h4 class="font-space font-bold text-base text-slate-900 dark:text-white mb-1.5" data-tr="3B Tasarım ve Fiziksel Prototipleme" data-en="3D Design & Physical Prototyping" data-zh="3D设计与物理原型制作">3B Tasarım ve Fiziksel Prototipleme</h4>
+                            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed"
+                               data-tr="CAD programlarında (SolidWorks, FreeCAD) çizdiğim mekanik parçaları 3B yazıcıyla üreterek fikirlerimi somut modellere dönüştürmekten keyif alıyorum."
+                               data-en="I enjoy turning ideas into tangible models by designing mechanical parts in CAD software (SolidWorks, FreeCAD) and fabricating them on a 3D printer."
+                               data-zh="我喜欢使用CAD软件（SolidWorks、FreeCAD）设计机械零件，并通过3D打印机将其转化为实体模型。">
+                                CAD programlarında (SolidWorks, FreeCAD) çizdiğim mekanik parçaları 3B yazıcıyla üreterek fikirlerimi somut modellere dönüştürmekten keyif alıyorum.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sağ: Kişisel İlgi Alanları -->
+                <div class="lg:col-span-5 tech-card bg-white/95 dark:bg-lab-900/95 border border-slate-200 dark:border-slate-800 p-8 flex flex-col justify-between">
+                    <div>
+                        <h4 class="text-2xl font-space font-bold text-slate-900 dark:text-white mb-4" data-tr="İlgi Alanlarım" data-en="My Interests" data-zh="个人兴趣">İlgi Alanlarım</h4>
+                        <p class="text-sm md:text-[15px] text-slate-600 dark:text-slate-300 leading-relaxed mb-6"
+                           data-tr="Boş zamanlarımda yeni şeyler üretmeyi ve öğrendiklerimi küçük projelere dönüştürmeyi seviyorum. Mekanik tasarımlar yapıp bunları 3B yazıcıyla hayata geçirmenin yanı sıra, karar alma süreçlerine duyduğum ilgi nedeniyle oyun teorisi üzerine okumalar yapıyor; odaklanma ve stratejik düşünme becerilerimi geliştirmek için satranç ve kort tenisiyle ilgileniyorum."
+                           data-en="In my free time, I enjoy building things and turning what I learn into small projects. Alongside 3D printing mechanical designs, I read about game theory out of a keen interest in decision-making processes, and play chess and tennis to practice focus and strategic thinking."
+                           data-zh="在业余时间，我喜欢动手制作并将所学知识转化为小项目。除了通过3D打印实现机械设计外，出于对决策过程的兴趣，我还阅读博弈论相关书籍，并通过国际象棋和网球锻炼专注力与战略思维。">
+                            Boş zamanlarımda yeni şeyler üretmeyi ve öğrendiklerimi küçük projelere dönüştürmeyi seviyorum. Mekanik tasarımlar yapıp bunları 3B yazıcıyla hayata geçirmenin yanı sıra, karar alma süreçlerine duyduğum ilgi nedeniyle oyun teorisi üzerine okumalar yapıyor; odaklanma ve stratejik düşünme becerilerimi geliştirmek için satranç ve kort tenisiyle ilgileniyorum.
+                        </p>
+
+                        <div class="space-y-3">
+                            <div class="p-3.5 bg-slate-50 dark:bg-lab-950 border border-slate-200 dark:border-slate-800 flex items-center gap-4">
+                                <span class="text-xl">🎲</span>
+                                <div>
+                                    <div class="text-sm font-bold text-slate-900 dark:text-white" data-tr="Oyun Teorisi" data-en="Game Theory" data-zh="博弈论">Oyun Teorisi</div>
+                                    <div class="text-xs text-slate-500 dark:text-slate-400" data-tr="Karar alma süreçleri ve stratejik analiz okumaları" data-en="Readings on decision-making and strategic analysis" data-zh="关于决策过程与策略分析的阅读">Karar alma süreçleri ve stratejik analiz okumaları</div>
+                                </div>
+                            </div>
+                            <div class="p-3.5 bg-slate-50 dark:bg-lab-950 border border-slate-200 dark:border-slate-800 flex items-center gap-4">
+                                <span class="text-xl">♟️</span>
+                                <div>
+                                    <div class="text-sm font-bold text-slate-900 dark:text-white" data-tr="Satranç" data-en="Chess" data-zh="国际象棋">Satranç</div>
+                                    <div class="text-xs text-slate-500 dark:text-slate-400" data-tr="Analitik düşünme, planlama ve odaklanma" data-en="Analytical thinking, planning, and focus" data-zh="分析思维、规划与专注力">Analitik düşünme, planlama ve odaklanma</div>
+                                </div>
+                            </div>
+                            <div class="p-3.5 bg-slate-50 dark:bg-lab-950 border border-slate-200 dark:border-slate-800 flex items-center gap-4">
+                                <span class="text-xl">🎾</span>
+                                <div>
+                                    <div class="text-sm font-bold text-slate-900 dark:text-white" data-tr="Kort Tenisi" data-en="Court Tennis" data-zh="网球">Kort Tenisi</div>
+                                    <div class="text-xs text-slate-500 dark:text-slate-400" data-tr="Koordinasyon, dinamizm ve spor disiplini" data-en="Coordination, dynamism, and athletic discipline" data-zh="协调性、活力与运动自律">Koordinasyon, dinamizm ve spor disiplini</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section id="iletisim" class="mt-32 mb-12 solid-panel relative overflow-hidden bg-slate-900 text-white border-none">
-            <div class="absolute inset-0 bg-gradient-to-r from-sky-900/40 to-transparent z-0"></div>
-            
-            <div class="relative z-10 px-8 py-20 text-center flex flex-col items-center">
-                <h3 class="text-3xl md:text-4xl font-space font-bold mb-6 tracking-tight uppercase" data-tr="İletişime Geçin" data-en="Get in Touch" data-zh="保持联系">
-                    İletişime Geçin
-                </h3>
-                <p class="text-slate-300 mb-10 max-w-2xl text-lg font-light" data-tr="Savunma sanayii ve Ar-Ge alanındaki projelere dahil olmak, disiplinli bir ekibin parçası olarak değer üretmek ve mesleki gelişimimi sürdürmek istiyorum. Mülakat ve tanışma süreçleri için bana her zaman ulaşabilirsiniz." data-en="I want to be involved in projects in the defense industry and R&D field, create value as part of a disciplined team, and continue my professional development. You can always reach out to me for interviews and meetings." data-zh="我希望参与国防工业和研发领域的项目，作为纪律严明的团队一员创造价值，并继续我的专业发展。您随时可以联系我进行面试和会面。">
-                    Savunma sanayii ve Ar-Ge alanındaki projelere dahil olmak, disiplinli bir ekibin parçası olarak değer üretmek ve mesleki gelişimimi sürdürmek istiyorum. Mülakat ve tanışma süreçleri için bana her zaman ulaşabilirsiniz.
-                </p>
-                
-                <a href="mailto:zehrakubraeryigit@gmail.com" class="inline-flex items-center gap-3 bg-sky-500 text-slate-950 px-8 py-4 rounded-none hover:bg-sky-400 transition-colors font-bold uppercase tracking-widest text-sm font-space shadow-[0_0_15px_rgba(56,189,248,0.3)]">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                    <span data-tr="E-POSTA GÖNDER" data-en="SEND E-MAIL" data-zh="发送电子邮件">E-POSTA GÖNDER</span>
-                </a>
+        <!-- İLETİŞİM BÖLÜMÜ -->
+        <section id="iletisim" class="mt-28">
+            <div class="tech-card bg-gradient-to-br from-slate-900 via-lab-900 to-sky-950 text-white border border-sky-500/40 p-10 md:p-16 relative overflow-hidden">
+                <div class="max-w-3xl mx-auto text-center relative z-10">
+                    <div class="inline-block font-mono text-xs text-sky-400 uppercase tracking-widest mb-3 px-3 py-1 bg-sky-500/10 border border-sky-500/30"
+                         data-tr="// İLETİŞİM" data-en="// CONTACT" data-zh="// 联系方式">// İLETİŞİM</div>
+                    
+                    <h3 class="text-3xl md:text-4xl font-space font-bold mb-5"
+                        data-tr="İletişime Geçin"
+                        data-en="Get in Touch"
+                        data-zh="保持联系">İletişime Geçin</h3>
+                    
+                    <p class="text-slate-300 text-base md:text-lg leading-relaxed mb-8"
+                       data-tr="Savunma sanayii, yarıiletken teknolojileri, optik ve Ar-Ge alanındaki projelere dahil olmak, disiplinli bir ekibin parçası olarak değer üretmek ve mesleki gelişimimi sürdürmek istiyorum. Tanışma ve mülakat süreçleri için bana her zaman ulaşabilirsiniz."
+                       data-en="I look forward to contributing to projects in the defense industry, semiconductor technologies, optics, and R&D, growing professionally as part of a dedicated engineering team. Feel free to reach out anytime for interviews and opportunities."
+                       data-zh="我希望参与国防工业、半导体技术、光学及研发领域的项目，作为严谨工程团队的一员创造价值并持续提升专业能力。欢迎随时联系我进行面试与交流。">
+                        Savunma sanayii, yarıiletken teknolojileri, optik ve Ar-Ge alanındaki projelere dahil olmak, disiplinli bir ekibin parçası olarak değer üretmek ve mesleki gelişimimi sürdürmek istiyorum. Tanışma ve mülakat süreçleri için bana her zaman ulaşabilirsiniz.
+                    </p>
+
+                    <div class="flex flex-wrap justify-center gap-4 font-mono text-xs">
+                        <a href="mailto:zehrakubraeryigit@gmail.com" class="inline-flex items-center gap-3 bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold px-8 py-4 uppercase tracking-wider transition shadow-[0_0_25px_rgba(56,189,248,0.4)]">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            <span>zehrakubraeryigit@gmail.com</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Footer -->
-        <footer class="flex flex-col items-center justify-center gap-4 text-sm text-slate-600 py-10 border-t border-slate-300 relative z-10">
-            <p class="font-space tracking-wide font-bold">© 2026 Zehra Kübra Eryiğit. <span data-tr="Tüm Hakları Saklıdır." data-en="All Rights Reserved." data-zh="版权所有。">Tüm Hakları Saklıdır.</span></p>
-            
-            <div class="mt-2 opacity-60 hover:opacity-100 transition-opacity cursor-help" title="Görüntülenme Sayısı">
-                <!-- Ziyaretçi Sayacı -->
-                <img src="https://komarev.com/ghpvc/?username=zehrakubraeryigit&label=VIEWS&color=0284C7&style=flat&label_color=0f172a" alt="Ziyaretçi Sayacı">
+        <!-- ALT BİLGİ (FOOTER) -->
+        <footer class="mt-16 pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500 dark:text-slate-400">
+            <div>
+                © 2026 Zehra Kübra Eryiğit · <span data-tr="Fizik Mühendisi" data-en="Physics Engineer" data-zh="物理工程师">Fizik Mühendisi</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <img src="https://komarev.com/ghpvc/?username=zehrakubraeryigit&label=VIEWS&color=0284C7&style=flat&label_color=0f172a" alt="Ziyaretçi Sayacı" class="opacity-75 hover:opacity-100 transition-opacity">
             </div>
         </footer>
     </div>
 
-    <!-- Scripts -->
+    <!-- TAM EKRAN GÖRSEL İNCELEYİCİ (LIGHTBOX MODAL) -->
+    <div id="lightboxModal" class="fixed inset-0 z-50 bg-lab-950/90 backdrop-blur-md hidden items-center justify-center p-4" onclick="closeLightbox()">
+        <div class="max-w-4xl w-full bg-lab-900 border border-sky-500/40 p-4 relative" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-2 mb-3 font-mono text-xs text-sky-400">
+                <span id="lightboxCaption">GÖRSEL İNCELEME</span>
+                <button onclick="closeLightbox()" class="text-slate-400 hover:text-white px-2 py-0.5 border border-slate-700">ESC / KAPAT ✕</button>
+            </div>
+            <div class="flex justify-center items-center bg-white/5 max-h-[75vh] overflow-hidden">
+                <img id="lightboxImg" src="" alt="Detay Görünümü" class="max-h-[72vh] w-auto object-contain">
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT: DİL, TEMA, FOTONİK NOKTA ÖRGÜSÜ VE SİMÜLASYONLAR -->
     <script>
-        // Language Switcher Script
+        /* 1. DİL DEĞİŞTİRİCİ (TR / EN / ZH) */
         function setLang(lang) {
             const langs = ['tr', 'en', 'zh'];
             langs.forEach(l => {
                 const btn = document.getElementById('btn-' + l);
-                if(l === lang) {
-                    btn.classList.add('bg-sky-600', 'text-white', 'font-bold');
-                    btn.classList.remove('text-slate-600', 'hover:text-slate-900');
+                if (l === lang) {
+                    btn.className = 'px-2.5 py-1 bg-sky-500 text-slate-950 font-bold transition';
                 } else {
-                    btn.classList.remove('bg-sky-600', 'text-white', 'font-bold');
-                    btn.classList.add('text-slate-600', 'hover:text-slate-900');
+                    btn.className = 'px-2.5 py-1 text-slate-600 dark:text-slate-400 hover:text-sky-400 transition';
                 }
             });
 
-            const elements = document.querySelectorAll('[data-tr]');
-            elements.forEach(el => {
-                if (el.getAttribute('data-' + lang)) {
-                    el.innerHTML = el.getAttribute('data-' + lang);
-                }
+            document.querySelectorAll('[data-tr]').forEach(el => {
+                const val = el.getAttribute('data-' + lang);
+                if (val) el.innerHTML = val;
             });
+            document.documentElement.lang = lang;
         }
 
-        // --- SAYFA AÇILIŞINDAKİ 1 SEFERLİK SAVAŞ UÇAĞI KALKIŞI ---
-        window.addEventListener('load', () => {
-            setTimeout(launchInitialJet, 300);
+        /* 2. KOYU / AÇIK TEMA DEĞİŞTİRİCİ */
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+        }
+
+        /* 3. LIGHTBOX (GÖRSEL BÜYÜTME) */
+        function openLightbox(src, caption) {
+            const modal = document.getElementById('lightboxModal');
+            document.getElementById('lightboxImg').src = src;
+            document.getElementById('lightboxCaption').textContent = caption;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+        function closeLightbox() {
+            const modal = document.getElementById('lightboxModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
         });
 
-        function launchInitialJet() {
-            const jet = document.createElement('div');
-            jet.className = 'initial-jet';
-            jet.innerHTML = `
-                <svg viewBox="0 0 100 100" fill="#334155" class="w-64 h-64 md:w-96 md:h-96 opacity-70">
-                    <path d="M50 0 L55 20 L95 50 L95 60 L55 55 L55 80 L75 95 L75 100 L50 90 L25 100 L25 95 L45 80 L45 55 L5 60 L5 50 L45 20 Z"/>
-                </svg>`;
-            document.body.appendChild(jet);
-            setTimeout(() => jet.remove(), 6500);
-        }
+        /* 4. ARKA PLAN FOTONİK DALGA & NOKTA ÖRGÜSÜ (İLK TASARIMDAKİ NOKTALAR - KARESİZ) */
+        const waveCanvas = document.getElementById('waveCanvas');
+        const wCtx = waveCanvas.getContext('2d');
+        let mouseX = -1000, mouseY = -1000;
+        let waveTime = 0;
 
-        // --- MOUSE HAREKETİ İLE FÜZE VE PATLAMA ---
-        let lastMissileTime = 0;
-        document.addEventListener('mousemove', (e) => {
-            let now = Date.now();
-            if(now - lastMissileTime > 1200) { 
-                lastMissileTime = now;
-                spawnMissile(e.clientX, e.clientY);
+        function resizeWaveCanvas() {
+            waveCanvas.width = window.innerWidth;
+            waveCanvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeWaveCanvas);
+        resizeWaveCanvas();
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateWaveLattice() {
+            wCtx.clearRect(0, 0, waveCanvas.width, waveCanvas.height);
+            waveTime += 0.035;
+            const spacing = 55;
+            const isDark = document.documentElement.classList.contains('dark');
+
+            for (let x = spacing / 2; x < waveCanvas.width; x += spacing) {
+                for (let y = spacing / 2; y < waveCanvas.height; y += spacing) {
+                    const dx = x - mouseX;
+                    const dy = y - mouseY;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    
+                    // Elektromanyetik dalga fazı ve hafif nokta etkileşimi
+                    const wave = Math.sin(dist * 0.025 - waveTime) * Math.exp(-dist / 320);
+                    const offsetX = (dx / (dist + 1)) * wave * 12;
+                    const offsetY = (dy / (dist + 1)) * wave * 12;
+
+                    const radius = 1.2 + Math.max(0, wave * 2.2);
+                    const alpha = isDark ? (0.15 + Math.max(0, wave * 0.55)) : (0.12 + Math.max(0, wave * 0.4));
+
+                    wCtx.beginPath();
+                    wCtx.arc(x + offsetX, y + offsetY, radius, 0, Math.PI * 2);
+                    wCtx.fillStyle = `rgba(56, 189, 248, ${alpha})`;
+                    wCtx.fill();
+                }
             }
-        });
-
-        function spawnMissile(x, y) {
-            const container = document.createElement('div');
-            container.className = 'missile-container';
-            
-            const angleStr = -60 + (Math.random() * 90); 
-            const rad = angleStr * (Math.PI / 180);
-            
-            const distance = 300 + Math.random() * 250;
-            const tx = Math.sin(rad) * distance + 'px';
-            const ty = -Math.cos(rad) * distance + 'px';
-            
-            container.style.left = (x - 24) + 'px'; 
-            container.style.top = (y - 48) + 'px';
-            container.style.setProperty('--angle', angleStr + 'deg');
-            container.style.setProperty('--tx', tx);
-            container.style.setProperty('--ty', ty);
-            
-            container.innerHTML = `
-                <div class="missile-body">
-                    <svg viewBox="0 0 32 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-12 h-24 transform -translate-y-4 opacity-80">
-                        <path d="M16 2 C12 10 12 20 12 48 H20 C20 20 20 10 16 2 Z" fill="rgba(241, 245, 249, 0.4)" stroke="#475569" stroke-width="1.5"/>
-                        <path d="M12 40 L6 48 L6 52 L12 48 Z" fill="rgba(148, 163, 184, 0.5)" stroke="#334155" stroke-width="1.5"/>
-                        <path d="M20 40 L26 48 L26 52 L20 48 Z" fill="rgba(148, 163, 184, 0.5)" stroke="#334155" stroke-width="1.5"/>
-                        <path d="M14 48 L16 64 L18 48 Z" fill="#ea580c" class="animate-pulse"/>
-                        <path d="M15 48 L16 56 L17 48 Z" fill="#fef08a" class="animate-pulse" style="animation-delay: 0.1s;"/>
-                    </svg>
-                </div>
-                <div class="explosion-blast"></div>
-                <div class="debris debris-1"></div>
-                <div class="debris debris-2"></div>
-                <div class="debris debris-3"></div>
-                <div class="debris debris-4"></div>
-            `;
-            
-            document.body.appendChild(container);
-            setTimeout(() => container.remove(), 1800);
+            requestAnimationFrame(animateWaveLattice);
         }
+        animateWaveLattice();
+
+        /* 5. HERO OSİLOSKOP & İNCE FİLM GİRİŞİM SİMÜLATÖRÜ */
+        const scopeCanvas = document.getElementById('scopeCanvas');
+        const sCtx = scopeCanvas.getContext('2d');
+        const wlSlider = document.getElementById('wlSlider');
+        const thSlider = document.getElementById('thSlider');
+        const wlLabel = document.getElementById('wlLabel');
+        const thLabel = document.getElementById('thLabel');
+        const opdValue = document.getElementById('opdValue');
+        const phaseState = document.getElementById('phaseState');
+        let scopePhase = 0;
+
+        function wavelengthToColor(wl) {
+            if (wl < 440) return '#a855f7';
+            if (wl < 495) return '#38bdf8';
+            if (wl < 570) return '#10b981';
+            if (wl < 620) return '#f59e0b';
+            return '#ef4444';
+        }
+
+        function animateScope() {
+            const width = scopeCanvas.width = scopeCanvas.clientWidth;
+            const height = scopeCanvas.height = scopeCanvas.clientHeight;
+            sCtx.clearRect(0, 0, width, height);
+
+            const wl = parseFloat(wlSlider.value);
+            const d = parseFloat(thSlider.value);
+            const n = 1.46;
+            const opd = 2 * n * d;
+            const phaseDiff = (2 * Math.PI * opd) / wl;
+            const interferenceAmp = Math.cos(phaseDiff / 2);
+
+            wlLabel.textContent = `${wl} nm`;
+            thLabel.textContent = `${d} nm`;
+            opdValue.textContent = `${Math.round(opd)} nm`;
+
+            if (Math.abs(interferenceAmp) > 0.7) {
+                phaseState.textContent = 'CONSTRUCTIVE (YAPICI GİRİŞİM)';
+                phaseState.className = 'text-emerald-400 font-bold';
+            } else if (Math.abs(interferenceAmp) < 0.35) {
+                phaseState.textContent = 'DESTRUCTIVE (YIKICI GİRİŞİM)';
+                phaseState.className = 'text-rose-400 font-bold';
+            } else {
+                phaseState.textContent = 'PARTIAL PHASE SHIFT';
+                phaseState.className = 'text-amber-400 font-bold';
+            }
+
+            scopePhase += 0.06;
+            const color = wavelengthToColor(wl);
+
+            // Gelen Dalga (Kesikli Çizgi)
+            sCtx.beginPath();
+            sCtx.setLineDash([4, 4]);
+            sCtx.strokeStyle = 'rgba(148, 163, 184, 0.35)';
+            sCtx.lineWidth = 1.5;
+            for (let x = 0; x < width; x++) {
+                const k = (2 * Math.PI) / (wl * 0.18);
+                const y = height / 2 + Math.sin(k * x - scopePhase) * 20;
+                x === 0 ? sCtx.moveTo(x, y) : sCtx.lineTo(x, y);
+            }
+            sCtx.stroke();
+
+            // Girişim Sonucu Toplam Dalga
+            sCtx.beginPath();
+            sCtx.setLineDash([]);
+            sCtx.strokeStyle = color;
+            sCtx.lineWidth = 2.5;
+            for (let x = 0; x < width; x++) {
+                const k = (2 * Math.PI) / (wl * 0.18);
+                const y1 = Math.sin(k * x - scopePhase) * 20;
+                const y2 = Math.sin(k * x - scopePhase + phaseDiff) * 20;
+                const y = height / 2 + (y1 + y2) * 0.85;
+                x === 0 ? sCtx.moveTo(x, y) : sCtx.lineTo(x, y);
+            }
+            sCtx.stroke();
+
+            requestAnimationFrame(animateScope);
+        }
+        animateScope();
+
+        /* 6. MATLAB PLAZMONİK NANOPARÇACIK SİMÜLATÖRÜ */
+        const plasmonCanvas = document.getElementById('plasmonCanvas');
+        const pCtx = plasmonCanvas.getContext('2d');
+        const gapSlider = document.getElementById('gapSlider');
+        const gapValue = document.getElementById('gapValue');
+        let plasmonTick = 0;
+
+        function animatePlasmon() {
+            const w = plasmonCanvas.width = plasmonCanvas.clientWidth;
+            const h = plasmonCanvas.height = plasmonCanvas.clientHeight;
+            pCtx.clearRect(0, 0, w, h);
+
+            plasmonTick += 0.07;
+            const gapPx = parseFloat(gapSlider.value);
+            gapValue.textContent = `${(gapPx / 10).toFixed(1)} nm`;
+
+            const cx = w / 2;
+            const cy = h / 2 - 8;
+            const r = 24;
+            const x1 = cx - gapPx / 2 - r;
+            const x2 = cx + gapPx / 2 + r;
+
+            const coupling = Math.max(0.15, (70 - gapPx) / 52);
+            const pulse = 0.75 + 0.25 * Math.sin(plasmonTick * 2);
+
+            const hotGrad = pCtx.createRadialGradient(cx, cy, 2, cx, cy, 45 + coupling * 35);
+            hotGrad.addColorStop(0, `rgba(254, 240, 138, ${coupling * pulse})`);
+            hotGrad.addColorStop(0.35, `rgba(245, 158, 11, ${coupling * 0.75 * pulse})`);
+            hotGrad.addColorStop(0.7, `rgba(56, 189, 248, ${coupling * 0.35})`);
+            hotGrad.addColorStop(1, 'rgba(5, 8, 17, 0)');
+
+            pCtx.fillStyle = hotGrad;
+            pCtx.fillRect(0, 0, w, h);
+
+            pCtx.strokeStyle = `rgba(56, 189, 248, ${0.2 + coupling * 0.3})`;
+            pCtx.lineWidth = 1;
+            for (let i = -3; i <= 3; i++) {
+                if (i === 0) continue;
+                pCtx.beginPath();
+                pCtx.moveTo(x1, cy);
+                pCtx.quadraticCurveTo(cx, cy + i * 22 * pulse, x2, cy);
+                pCtx.stroke();
+            }
+
+            const np1Grad = pCtx.createRadialGradient(x1 - 6, cy - 6, 3, x1, cy, r);
+            np1Grad.addColorStop(0, '#fde68a');
+            np1Grad.addColorStop(0.6, '#d97706');
+            np1Grad.addColorStop(1, '#78350f');
+            pCtx.beginPath();
+            pCtx.arc(x1, cy, r, 0, Math.PI * 2);
+            pCtx.fillStyle = np1Grad;
+            pCtx.fill();
+
+            const np2Grad = pCtx.createRadialGradient(x2 - 6, cy - 6, 3, x2, cy, r);
+            np2Grad.addColorStop(0, '#fde68a');
+            np2Grad.addColorStop(0.6, '#d97706');
+            np2Grad.addColorStop(1, '#78350f');
+            pCtx.beginPath();
+            pCtx.arc(x2, cy, r, 0, Math.PI * 2);
+            pCtx.fillStyle = np2Grad;
+            pCtx.fill();
+
+            requestAnimationFrame(animatePlasmon);
+        }
+        animatePlasmon();
     </script>
 </body>
 </html>
